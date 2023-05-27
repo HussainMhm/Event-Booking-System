@@ -17,7 +17,7 @@ namespace MetaX
         public int UserID { get; set; }
 
         [Required]
-        public DateTime ReservationDate { get; set; }
+        public DateOnly ReservationDate { get; set; }
 
         [Required]
         public bool IsActive { get; set; }
