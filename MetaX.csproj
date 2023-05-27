@@ -20,9 +20,17 @@
   <ItemGroup>
     <None Remove="Data\" />
     <None Remove="Model\" />
+    <None Remove="Pages\Event\" />
+    <None Remove="Pages\Users\" />
+    <None Remove="Pages\Admin\" />
+    <None Remove="Pages\Admin\Event\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Model\" />
+    <Folder Include="Pages\Event\" />
+    <Folder Include="Pages\User\" />
+    <Folder Include="Pages\Admin\" />
+    <Folder Include="Pages\Admin\Event\" />
   </ItemGroup>
 </Project>
