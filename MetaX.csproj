@@ -30,7 +30,5 @@
     <Folder Include="Model\" />
     <Folder Include="Pages\Event\" />
     <Folder Include="Pages\User\" />
-    <Folder Include="Pages\Admin\" />
-    <Folder Include="Pages\Admin\Event\" />
   </ItemGroup>
 </Project>
