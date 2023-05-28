@@ -34,9 +34,9 @@
     transition: all 0.3s ease-in-out;
 }
 
-    .card .card-block {
-        padding: 25px;
-    }
+.card .card-block {
+    padding: 25px;
+}
 
 .order-card i {
     font-size: 26px;
@@ -48,4 +48,9 @@
 
 .f-right {
     float: right;
+}
+
+.fa{
+    margin-top: 4px;
+    margin-right:8px;
 }
