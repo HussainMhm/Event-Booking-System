@@ -1,5 +1,71 @@
 ﻿@page
 @model MetaX.Pages.Admin.Event.IndexModel
 @{
+    ViewData["Title"] = "Etkinlik Yönetimi";
     Layout = "~/Pages/Shared/_Layout2.cshtml";
 }
+
+<div class="container float-start">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-left">Etkinlik Yönetimi</h2>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control" placeholder="Etkinlik Ara...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="#" class="btn btn-success">
+                <i class="fas fa-plus"></i> Yeni Event Ekle
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">İsim</th>
+                        <th scope="col">Tarih</th>
+                        <th scope="col">Lokasyon</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Event 1</td>
+                        <td>2023-05-01</td>
+                        <td>İstanbul</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Event 2</td>
+                        <td>2023-05-15</td>
+                        <td>Ankara</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Event 3</td>
+                        <td>2023-06-01</td>
+                        <td>İzmir</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary">View</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
