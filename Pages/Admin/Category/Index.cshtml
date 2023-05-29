@@ -3,3 +3,64 @@
 @{
     Layout = "~/Pages/Shared/_Layout2.cshtml";
 }
+
+<div class="container float-start">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-left">Kategori Yönetimi</h2>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control" placeholder="Kategori Ara...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="#" class="btn btn-danger">
+                <i class="fas fa-plus"></i> Yeni Kategori Ekle
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Kategori ID</th>
+                        <th scope="col">Kategori Adı</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Business</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Sport</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Conference</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-primary">View</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
