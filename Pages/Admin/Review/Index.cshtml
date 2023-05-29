@@ -3,3 +3,63 @@
 @{
     Layout = "~/Pages/Shared/_Layout2.cshtml";
 }
+
+
+<div class="container float-start">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-left">Değerlendirme Yönetimi</h2>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control" placeholder="Yorum Ara...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Etkinlik Adı</th>
+                        <th scope="col">Kullanıcı ID</th>
+                        <th scope="col">Puan</th>
+                        <th scope="col">Yorum</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Etkinlik 1</td>
+                        <td>User123</td>
+                        <td>4.5</td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                        <td>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Etkinlik 2</td>
+                        <td>User456</td>
+                        <td>3.2</td>
+                        <td>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                        <td>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <!-- Add more table rows for additional reviews -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
