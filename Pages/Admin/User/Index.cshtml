@@ -3,3 +3,96 @@
 @{
     Layout = "~/Pages/Shared/_Layout2.cshtml";
 }
+
+<div class="container float-start">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-left">Kullanıcı Yönetimi</h2>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control" placeholder="Kullanıcı Ara...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Ad</th>
+                        <th scope="col">Soyad</th>
+                        <th scope="col">Mail</th>
+                        <th scope="col">Telefon Numarası</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Ahmet</td>
+                        <td>Yılmaz</td>
+                        <td>ahmet.yilmaz@example.com</td>
+                        <td>+90 555 123 4567</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">Edit</button>
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Ayşe</td>
+                        <td>Kaya</td>
+                        <td>ayse.kaya@example.com</td>
+                        <td>+90 555 234 5678</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">Edit</button>
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Mehmet</td>
+                        <td>Demir</td>
+                        <td>mehmet.demir@example.com</td>
+                        <td>+90 555 345 6789</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">Edit</button>
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Elif</td>
+                        <td>Öztürk</td>
+                        <td>elif.ozturk@example.com</td>
+                        <td>+90 555 456 7890</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">Edit</button>
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Ali</td>
+                        <td>Taş</td>
+                        <td>ali.tas@example.com</td>
+                        <td>+90 555 567 8901</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">Edit</button>
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
