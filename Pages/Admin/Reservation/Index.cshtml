@@ -3,3 +3,99 @@
 @{
     Layout = "~/Pages/Shared/_Layout2.cshtml";
 }
+
+<div class="container float-start">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-left">Etkinlik Yönetimi</h2>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control" placeholder="Etkinlik Ara...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-right">
+            <label for="filterStatus">Filter:</label>
+            <select id="filterStatus" class="form-control">
+                <option value="">Reservasyon Durumu</option>
+                <option value="Active">Active</option>
+                <option value="Finished">Finished</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Reservation ID</th>
+                        <th scope="col">Event Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>User1</td>
+                        <td>123456</td>
+                        <td>Event 1</td>
+                        <td>$50</td>
+                        <td>Active</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger">İptal Et</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>User2</td>
+                        <td>789012</td>
+                        <td>Event 2</td>
+                        <td>$75</td>
+                        <td>Active</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger">İptal Et</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>User3</td>
+                        <td>345678</td>
+                        <td>Event 3</td>
+                        <td>$100</td>
+                        <td>Finished</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger">İptal Et</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>User4</td>
+                        <td>901234</td>
+                        <td>Event 4</td>
+                        <td>$120</td>
+                        <td>Active</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger">İptal Et</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>User5</td>
+                        <td>567890</td>
+                        <td>Event 5</td>
+                        <td>$80</td>
+                        <td>Finished</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger">İptal Et</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
