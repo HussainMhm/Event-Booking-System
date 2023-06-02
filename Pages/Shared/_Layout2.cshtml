@@ -176,7 +176,7 @@
             var handle2 = $(".ui-slider-handle:eq(1)");
             handle1.append('<div class="value">' + $("#priceSlider").slider("values", 0) + '</div>');
             handle2.append('<div class="value">' + $("#priceSlider").slider("values", 1) + '</div>');
-        });
-    </script>
+        });</script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
