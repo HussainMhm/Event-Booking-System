@@ -83,17 +83,17 @@
 </div>
 
 @section Scripts {
-    <script>$(function () {
+    <script>
+        $(function () {
             $('.delete-category').click(function () {
                 var categoryId = $(this).data('categoryid');
                 var categoryName = $(this).data('categoryname');
 
                 $('#categoryNameToDelete').text(categoryName); // Set the category name in the modal
 
-                // You must ensure that the modal is shown to the user before this event is fired.
                 $('#deleteConfirmationModal').on('shown.bs.modal', function () {
                     $('#confirmDeleteButton').off('click').on('click', function () {
-                        window.location.href = "/Admin/Category/Delete/" + categoryId;
+                        window.location.href = '@Url.Page("./Delete")' + "?id=" + categoryId;
                     });
                 });
 
@@ -104,5 +104,6 @@
             $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
                 $('#confirmDeleteButton').off('click');
             });
-        });</script>
+        });
+    </script>
 }
