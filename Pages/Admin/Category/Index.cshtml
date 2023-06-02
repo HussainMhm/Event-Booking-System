@@ -4,27 +4,6 @@
     Layout = "~/Pages/Shared/_Layout2.cshtml";
 }
 
-<!-- Add a hidden modal element -->
-<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteConfirmationModalLabel">Delete Confirmation</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to delete the category <span id="categoryNameToDelete"></span>?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container float-start">
     <div class="row">
         <div class="col-md-12">
@@ -71,8 +50,8 @@
                             <td>@category.CategoryID</td>
                             <td>@category.Name</td>
                             <td>
-                                <a href="/Admin/Category/Details/@category.CategoryID" class="btn btn-sm btn-primary">View</a>
-                                <button class="btn btn-sm btn-danger delete-category" data-toggle="modal" data-target="#deleteConfirmationModal" data-categoryid="@category.CategoryID" data-categoryname="@category.Name">Delete</button>
+                                <a asp-page="./Update" asp-route-id="@category.CategoryID" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-page="./Delete" asp-route-id="@category.CategoryID" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                     }
@@ -81,29 +60,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <script>
-        $(function () {
-            $('.delete-category').click(function () {
-                var categoryId = $(this).data('categoryid');
-                var categoryName = $(this).data('categoryname');
-
-                $('#categoryNameToDelete').text(categoryName); // Set the category name in the modal
-
-                $('#deleteConfirmationModal').on('shown.bs.modal', function () {
-                    $('#confirmDeleteButton').off('click').on('click', function () {
-                        window.location.href = '@Url.Page("./Delete")' + "?id=" + categoryId;
-                    });
-                });
-
-                $('#deleteConfirmationModal').modal('show'); // Show the modal
-            });
-
-            // Reset the event handler once the modal has been hidden.
-            $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
-                $('#confirmDeleteButton').off('click');
-            });
-        });
-    </script>
-}
