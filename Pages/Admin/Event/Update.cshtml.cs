@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MetaX.Pages.Admin
+namespace MetaX.Pages.Admin.Event
 {
-	public class EventEditModel : PageModel
+	public class UpdateModel : PageModel
     {
         public void OnGet()
         {
