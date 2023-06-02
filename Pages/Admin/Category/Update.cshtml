@@ -1,6 +1,19 @@
 ﻿@page
 @model MetaX.Pages.Admin.Category.UpdateModel
 @{
-    ViewData["Title"] = "";
+
+    ViewData["Title"] = "Kategori Güncelleme";
     Layout = "~/Pages/Shared/_Layout2.cshtml";
 }
+
+<div class="container float-start">
+    <h1>Update Category</h1>
+    <form method="post">
+        <input type="hidden" asp-for="Category.CategoryID" />
+        <div class="form-group mt-2">
+            <label>Category Name:</label>
+            <input class="form-control" required asp-for="Category.Name" />
+        </div>
+        <button type="submit" class="btn btn-md btn-primary mt-3">Update</button>
+    </form>
+</div>
