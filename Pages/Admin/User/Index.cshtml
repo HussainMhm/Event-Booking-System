@@ -25,7 +25,8 @@
             <input type="text" id="locationInput" class="form-control" placeholder="Kullanıcı Telefon Numarası">
         </div>
     </div>
-        <div class="row mt-5">
+
+    <div class="row mt-5">
         <div class="col-2">
             <a href="#" class="btn btn-primary w-100">
                 <i class="fas fa-search"></i> Ara
@@ -36,9 +37,7 @@
                 <i class="fas fa-times"></i>
             </a>
         </div>
-
     </div>
-
 
     <div class="row mt-4">
         <div class="col-md-12">
@@ -54,63 +53,46 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Ahmet</td>
-                        <td>Yılmaz</td>
-                        <td>ahmet.yilmaz@example.com</td>
-                        <td>+90 555 123 4567</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary">Edit</button>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Ayşe</td>
-                        <td>Kaya</td>
-                        <td>ayse.kaya@example.com</td>
-                        <td>+90 555 234 5678</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary">Edit</button>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Mehmet</td>
-                        <td>Demir</td>
-                        <td>mehmet.demir@example.com</td>
-                        <td>+90 555 345 6789</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary">Edit</button>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Elif</td>
-                        <td>Öztürk</td>
-                        <td>elif.ozturk@example.com</td>
-                        <td>+90 555 456 7890</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary">Edit</button>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Ali</td>
-                        <td>Taş</td>
-                        <td>ali.tas@example.com</td>
-                        <td>+90 555 567 8901</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary">Edit</button>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
+                    @foreach (var user in Model.UserListing)
+                    {
+                        <tr>
+                            <td>@user.UserID</td>
+                            <td>@user.Name</td>
+                            <td>@user.Surname</td>
+                            <td>@user.Email</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>
+                                <form method="post" asp-page-handler="Delete" asp-route-userId="@user.UserID" onsubmit="return confirmDelete(event);">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this user!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
+        }
+    </script>
+}

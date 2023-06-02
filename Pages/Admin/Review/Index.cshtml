@@ -57,14 +57,15 @@
                     @foreach (var review in Model.ReviewListing)
                     {
                         <tr>
-
                             <td>@review.ReviewID</td>
                             <td>@review.EventID</td>
                             <td>@review.UserID</td>
                             <td>@review.Rating</td>
                             <td>@review.Comment</td>
                             <td>
-                                <button class="btn btn-sm btn-danger">Delete</button>
+                                <form method="post" asp-page-handler="Delete" asp-route-reviewId="@review.ReviewID" onsubmit="return confirmDelete(event);">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     }
@@ -73,3 +74,25 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this review!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
+        }
+    </script>
+}
