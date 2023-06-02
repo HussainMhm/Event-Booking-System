@@ -51,7 +51,9 @@
                             <td>@category.Name</td>
                             <td>
                                 <a asp-page="./Update" asp-route-id="@category.CategoryID" class="btn btn-sm btn-primary">Edit</a>
-                                <a asp-page="./Delete" asp-route-id="@category.CategoryID" class="btn btn-sm btn-danger">Delete</a>
+                                <form method="post" class="d-inline" asp-page-handler="Delete" asp-route-categoryId="@category.CategoryID" onsubmit="return confirmDelete(event);">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     }
@@ -60,3 +62,27 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this review!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
+        }
+    </script>
+}

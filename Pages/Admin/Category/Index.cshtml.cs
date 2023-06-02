@@ -19,5 +19,15 @@ namespace MetaX.Pages.Admin.Category
         {
             CategoryListing = _db.CategoriesTable.ToList();
         }
+        public IActionResult OnPostDelete(int categoryId)
+        {
+            var category = _db.CategoriesTable.Find(categoryId);
+            if (category != null)
+            {
+                _db.CategoriesTable.Remove(category);
+                _db.SaveChanges();
+            }
+            return RedirectToPage();
+        }
     }
 }
