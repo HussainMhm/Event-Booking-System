@@ -54,27 +54,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Etkinlik 1</td>
-                        <td>User123</td>
-                        <td>4.5</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                        <td>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Etkinlik 2</td>
-                        <td>User456</td>
-                        <td>3.2</td>
-                        <td>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                        <td>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Add more table rows for additional reviews -->
+                    @foreach (var review in Model.ReviewListing)
+                    {
+                        <tr>
+
+                            <td>@review.ReviewID</td>
+                            <td>@review.EventID</td>
+                            <td>@review.UserID</td>
+                            <td>@review.Rating</td>
+                            <td>@review.Comment</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
