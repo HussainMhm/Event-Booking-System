@@ -13,7 +13,7 @@
 
     <div class="row mt-4 justify-content-end">
         <div class="col-2 text-right align-self-end">
-            <a href="#" class="btn btn-success">
+            <a asp-page="Create" class="btn btn-success">
                 <i class="fas fa-plus"></i> Yeni Kategori Ekle
             </a>
         </div>
@@ -45,30 +45,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Business</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-primary">View</a>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Sport</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-primary">View</a>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Conference</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-primary">View</a>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
+                    @foreach (var category in Model.CategoryListing)
+                    {
+                        <tr>
+                            <td>@category.CategoryID</td>
+                            <td>@category.Name</td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-primary">Değiştir</a>
+                                <button class="btn btn-sm btn-danger">Sil</button>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
