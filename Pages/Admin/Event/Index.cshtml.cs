@@ -1,23 +1,23 @@
-﻿using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Mvc;
+﻿using MetaX.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
 
 namespace MetaX.Pages.Admin.Event
 {
     public class IndexModel : PageModel
     {
+        private readonly MetaxDbContext _db;
+
+        public List<Model.Event> EventListing { get; set; }
+
+        public IndexModel(MetaxDbContext db)
+        {
+            _db = db;
+        }
+
         public void OnGet()
         {
-        }
-
-
-       public IActionResult OnPostGoToPageUpdate() 
-        {
-            return RedirectToPage("Update");
-        }
-        public IActionResult OnPostGoToPageCreate()
-        {
-            return RedirectToPage("Create");
+            EventListing = _db.EventsTable.ToList();
         }
     }
 }

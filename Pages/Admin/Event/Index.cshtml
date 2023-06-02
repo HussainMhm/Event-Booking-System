@@ -12,23 +12,20 @@
         </div>
     </div>
 
-        <div class="row mt-4 justify-content-end">
-            <div class="col-2 text-right align-self-end">
-            <a href="#" class="btn btn-success" onclick="location.href='@Url.Page("Create")'">
+    <div class="row mt-4 justify-content-end">
+        <div class="col-2 text-right align-self-end">
+            <a href="/Admin/Event/Create" class="btn btn-success">
                 <i class="fas fa-plus"></i> Yeni Event Ekle
             </a>
         </div>
     </div>
     <div class="row mt-5">
         <div class="col-3">
-
             <input type="text" id="searchInput" class="form-control" placeholder="Etkinlik ismi">
-
         </div>
         <div class="col-3">
             <input type="text" id="locationInput" class="form-control" placeholder="Lokasyon">
         </div>
-
         <div class="col-2">
             <a href="#" class="btn btn-primary w-100">
                 <i class="fas fa-search"></i> Ara
@@ -39,9 +36,7 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-
     </div>
-
 
     <div class="row mt-4">
         <div class="col-md-12">
@@ -55,33 +50,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Event 1</td>
-                        <td>2023-05-01</td>
-                        <td>İstanbul</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-primary" onclick="location.href='@Url.Page("Update")'">View</a>
-                            <button class="btn btn-sm btn-danger" >Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Event 2</td>
-                        <td>2023-05-15</td>
-                        <td>Ankara</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-primary">View</a>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Event 3</td>
-                        <td>2023-06-01</td>
-                        <td>İzmir</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-primary">View</a>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
+                    @foreach (var eventModel in Model.EventListing)
+                    {
+                        <tr>
+                            <td>@eventModel.Title</td>
+                            <td>@eventModel.Date.ToShortDateString()</td>
+                            <td>@eventModel.Location</td>
+                            <td>
+                                <a href="/Admin/Event/Details/@eventModel.EventID" class="btn btn-sm btn-primary">View</a>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
