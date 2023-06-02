@@ -1,5 +1,26 @@
 ﻿@page
 @model MetaX.Pages.Admin.Category.CreateModel
 @{
+    ViewData["Title"] = "";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
 }
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-left">Yeni Kategori Ekle</h2>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <form method="post">
+                <div class="form-group">
+                    <label for="name">Kategori Adı</label>
+                    <input type="text" class="form-control" id="name" name="Name" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </form>
+        </div>
+    </div>
+</div>
