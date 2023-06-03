@@ -1,0 +1,105 @@
+﻿@page
+@model MetaX.Pages.Admin.User.IndexModel
+@{
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<div class="container float-start">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-left">Kullanıcı Yönetimi</h2>
+        </div>
+    </div>
+
+    <form id="searchForm" method="get">
+        <div class="row mt-4">
+            <div class="col-lg-2 my-2">
+                <input type="text" id="nameInput" class="form-control" placeholder="Ad" name="Name" value="@Model.Name">
+            </div>
+            <div class="col-lg-2 my-2">
+                <input type="text" id="surnameInput" class="form-control" placeholder="Soyad" name="Surname" value="@Model.Surname">
+            </div>
+            <div class="col-lg-2 my-2">
+                <input type="text" id="emailInput" class="form-control" placeholder="Mail" name="Email" value="@Model.Email">
+            </div>
+            <div class="col-lg-2 my-2">
+                <input type="text" id="phoneInput" class="form-control" placeholder="Telefon Numarası" name="PhoneNumber" value="@Model.PhoneNumber">
+            </div>
+            <div class="col-lg-2 my-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-search"></i> Ara
+                </button>
+            </div>
+            <div class="col-lg-2 my-2">
+                <button type="button" onclick="clearInput()" class="btn btn-outline-dark">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Ad</th>
+                        <th scope="col">Soyad</th>
+                        <th scope="col">Mail</th>
+                        <th scope="col">Telefon Numarası</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.UserListing)
+                    {
+                        <tr>
+                            <td>@user.UserID</td>
+                            <td>@user.Name</td>
+                            <td>@user.Surname</td>
+                            <td>@user.Email</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>
+                                <form method="post" asp-page-handler="Delete" asp-route-userId="@user.UserID" onsubmit="return confirmDelete(event);">
+                                    <button type="submit" class="btn btn-sm btn-danger">Kaldır</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Silmek istediğinizden emin misiniz?',
+                text: 'Bu işlemi daha sonra tekrar geri alamayacaksınız.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet, eminim!',
+                cancelButtonText: 'Hayır, vazgeçtim!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
+        }
+
+        function clearInput() {
+            document.getElementById('nameInput').value = '';
+            document.getElementById('surnameInput').value = '';
+            document.getElementById('emailInput').value = '';
+            document.getElementById('phoneInput').value = '';
+            document.getElementById('searchForm').submit();
+        }</script>
+}

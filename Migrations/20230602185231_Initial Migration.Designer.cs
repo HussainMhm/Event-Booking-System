@@ -4,6 +4,7 @@ using MetaX.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MetaX.Migrations
 {
     [DbContext(typeof(MetaxDbContext))]
-    partial class MetaxDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230602185231_Initial Migration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,32 +79,6 @@ namespace MetaX.Migrations
                     b.HasKey("EventID");
 
                     b.ToTable("EventsTable");
-                });
-
-            modelBuilder.Entity("MetaX.Model.Reservation", b =>
-                {
-                    b.Property<int>("ReservationID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationID"));
-
-                    b.Property<int>("EventID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReservationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ReservationID");
-
-                    b.HasIndex("EventID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("ReservationsTable");
                 });
 
             modelBuilder.Entity("MetaX.Model.Review", b =>
@@ -167,7 +144,36 @@ namespace MetaX.Migrations
                     b.ToTable("UsersTable");
                 });
 
-            modelBuilder.Entity("MetaX.Model.Reservation", b =>
+            modelBuilder.Entity("MetaX.Reservation", b =>
+                {
+                    b.Property<int>("ReservationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationID"));
+
+                    b.Property<int>("EventID")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ReservationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReservationID");
+
+                    b.HasIndex("EventID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("ReservationsTable");
+                });
+
+            modelBuilder.Entity("MetaX.Model.Review", b =>
                 {
                     b.HasOne("MetaX.Model.Event", "Event")
                         .WithMany()
@@ -186,7 +192,7 @@ namespace MetaX.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MetaX.Model.Review", b =>
+            modelBuilder.Entity("MetaX.Reservation", b =>
                 {
                     b.HasOne("MetaX.Model.Event", "Event")
                         .WithMany()

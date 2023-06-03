@@ -7,6 +7,46 @@ html {
     height: -webkit-fill-available;
 }
 
+/*reservation page */
+.ui-slider-horizontal {
+    height: 5px;
+    background: #0d6efd2e;
+}
+/*reservation page */
+.ui-slider-handle .value {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    background-color: #0d6efd7d;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+/*reservation page */
+.ui-slider .ui-slider-handle {
+    width: 14px;
+    height: 14px;
+    background: #0d6efd7d;
+    border-radius: 50%;
+    border: none;
+    top: -4px;
+    outline: none;
+}
+/*reservation page */
+.ui-slider-handle:active {
+    width: 14px;
+    height: 14px;
+    background: #0d6efd7d;
+    border-radius: 50%;
+    border: none;
+    top: -4px;
+    outline: none;
+}
+
+
+
 main {
     display: flex;
     flex-wrap: nowrap;

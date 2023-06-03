@@ -1,0 +1,28 @@
+﻿@page
+@model MetaX.Pages.Admin.Category.UpdateModel
+@{
+
+    ViewData["Title"] = "Kategori Güncelleme";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-left">Kategori Güncelle</h2>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <form method="post">
+                <input type="hidden" asp-for="Category.CategoryID" />
+                <div class="form-group">
+                    <label class="mb-2">Kategori Adı</label>
+                    <input class="form-control mb-3" required asp-for="Category.Name" />
+                </div>
+                <button type="submit" class="btn btn-primary px-3">Güncelle</button>
+            </form>
+        </div>
+    </div>
+</div>

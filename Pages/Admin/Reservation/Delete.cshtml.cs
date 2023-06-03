@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MetaX.Pages.Admin
+namespace MetaX.Pages.Admin.Reservation
 {
-	public class EventManagementModel : PageModel
+	public class DeleteModel : PageModel
     {
         public void OnGet()
         {

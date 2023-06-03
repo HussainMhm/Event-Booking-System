@@ -1,0 +1,110 @@
+﻿@page
+@model MetaX.Pages.Admin.Event.IndexModel
+@{
+    ViewData["Title"] = "Etkinlik Yönetimi";
+    Layout = "~/Pages/Shared/_Layout2.cshtml";
+}
+
+<div class="container float-start">
+    <div class="row justify-content-between">
+        <div class="col-auto">
+            <h2 class="text-left">Etkinlik Yönetimi</h2>
+        </div>
+        <div class="col-auto me-4">
+            <a href="/Admin/Event/Create" class="btn btn-success">
+                <i class="fas fa-plus"></i> Yeni Event
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <form id="searchForm" method="post" class="w-100">
+            <div class="row">
+                <div class="col-lg-4 col-12">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Etkinlik Adı" name="SearchInput" value="@Model.SearchInput">
+                </div>
+                <div class="col-lg-4 col-12 mt-2 mt-lg-0">
+                    <select id="locationInput" class="form-control" name="LocationInput">
+                        <option>Tüm Lokasyonlar</option>
+                        @foreach (var location in Model.EventLocations)
+                        {
+                            <option>@location</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-2 col-8 mt-2 mt-lg-0">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Ara
+                    </button>
+                </div>
+                <div class="col-1 mt-2 mt-lg-0">
+                    <button type="button" onclick="clearInput()" class="btn btn-outline-dark">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <button id="hiddenSubmit" type="submit" style="display: none;"></button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Etkinlik Adı</th>
+                        <th scope="col">Kategori</th>
+                        <th scope="col">Tarih</th>
+                        <th scope="col">Fiyat</th>
+                        <th scope="col">Lokasyon</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eventModel in Model.EventListing)
+                    {
+                        <tr>
+                            <td>@eventModel.Title</td>
+                            <td>@eventModel.Category</td>
+                            <td>@eventModel.Date.ToString("dd-MM-yyyy")</td>
+                            <td>₺ @eventModel.Price</td>
+                            <td>@eventModel.Location</td>
+                            <td>
+                                <a asp-page="./Update" asp-route-id="@eventModel.EventID" class="btn btn-sm btn-primary">Görüntüle</a>
+                                <form method="post" class="d-inline" asp-page-handler="Delete" asp-route-eventId="@eventModel.EventID" onsubmit="return confirmDelete(event);">
+                                    <button type="submit" class="btn btn-sm btn-danger">Kaldır</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>function confirmDelete(event) {
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Silmek istediğinizden emin misiniz?',
+            text: 'Bu işlemi daha sonra tekrar geri alamayacaksınız.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Evet, eminim!',
+            cancelButtonText: 'Hayır, vazgeçtim!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.submit();
+            }
+        });
+    }
+    function clearInput() {
+        document.getElementById('locationInput').value = 'All Locations';
+        document.getElementById('searchInput').value = '';
+        document.getElementById('hiddenSubmit').click();
+    }</script>
+

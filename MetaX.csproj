@@ -9,6 +9,8 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <PackageReference Include="jQuery" Version="3.7.0" />
+    <PackageReference Include="jQuery.UI" Version="1.12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
@@ -24,13 +26,13 @@
     <None Remove="Pages\Users\" />
     <None Remove="Pages\Admin\" />
     <None Remove="Pages\Admin\Event\" />
+    <None Remove="Pages\Review\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Model\" />
     <Folder Include="Pages\Event\" />
     <Folder Include="Pages\User\" />
-    <Folder Include="Pages\Admin\" />
-    <Folder Include="Pages\Admin\Event\" />
+    <Folder Include="Pages\Review\" />
   </ItemGroup>
 </Project>

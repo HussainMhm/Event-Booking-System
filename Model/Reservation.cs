@@ -3,7 +3,7 @@ using MetaX.Model;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MetaX
+namespace MetaX.Model
 {
     public class Reservation
     {
@@ -19,16 +19,11 @@ namespace MetaX
         [Required]
         public DateTime ReservationDate { get; set; }
 
-        [Required]
-        public bool IsActive { get; set; }
-
         [ForeignKey("EventID")]
         public Event Event { get; set; }
 
         [ForeignKey("UserID")]
         public User User { get; set; }
     }
-
-
 }
 
