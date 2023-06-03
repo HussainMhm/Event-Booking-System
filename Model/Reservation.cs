@@ -19,9 +19,6 @@ namespace MetaX.Model
         [Required]
         public DateTime ReservationDate { get; set; }
 
-        [Required]
-        public bool IsActive { get; set; }
-
         [ForeignKey("EventID")]
         public Event Event { get; set; }
 
