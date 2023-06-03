@@ -54,9 +54,9 @@
                             <td>@category.CategoryID</td>
                             <td>@category.Name</td>
                             <td>
-                                <a asp-page="./Update" asp-route-id="@category.CategoryID" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-page="./Update" asp-route-id="@category.CategoryID" class="btn btn-sm btn-primary">Görüntüle</a>
                                 <form method="post" class="d-inline" asp-page-handler="Delete" asp-route-categoryId="@category.CategoryID" onsubmit="return confirmDelete(event);">
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-sm btn-danger">Kaldır</button>
                                 </form>
                             </td>
                         </tr>
@@ -69,17 +69,19 @@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>function confirmDelete(event) {
+    <script>
+        function confirmDelete(event) {
             event.preventDefault();
 
             Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this category!',
+                title: 'Silmek istediğinizden emin misiniz?',
+                text: 'Bu işlemi daha sonra tekrar geri alamayacaksınız.',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Evet, eminim!',
+                cancelButtonText: 'Hayır, vazgeçtim!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.target.submit();

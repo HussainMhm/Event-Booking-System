@@ -30,8 +30,8 @@ namespace MetaX.Pages.Admin.Reservation
         [BindProperty(SupportsGet = true)]
         public string Status { get; set; }
 
-        public bool IsStatusActive => Status == "Active";
-        public bool IsStatusFinished => Status == "Finished";
+        public bool IsStatusActive => Status == "Aktif";
+        public bool IsStatusFinished => Status == "Bitti";
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -49,13 +49,13 @@ namespace MetaX.Pages.Admin.Reservation
 
             if (!string.IsNullOrEmpty(Status))
             {
-                if (Status == "Active")
+                if (Status == "Aktif")
                 {
-                    query = query.Where(r => r.ReservationDate >= DateTime.Today);
+                    query = query.Where(r => r.Event.Date >= DateTime.Today);
                 }
-                else if (Status == "Finished")
+                else if (Status == "Bitti")
                 {
-                    query = query.Where(r => r.ReservationDate < DateTime.Today);
+                    query = query.Where(r => r.Event.Date < DateTime.Today);
                 }
             }
 

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using MetaX.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MetaX.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace MetaX.Pages.Admin.Event
 {
@@ -21,13 +23,15 @@ namespace MetaX.Pages.Admin.Event
             _db = db;
         }
 
-        public IActionResult OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Event = _db.EventsTable.Find(id);
+            Event = await _db.EventsTable.FindAsync(id);
             if (Event == null)
             {
                 return NotFound();
             }
+
+            ViewData["Categories"] = await _db.CategoriesTable.ToListAsync();
             return Page();
         }
 

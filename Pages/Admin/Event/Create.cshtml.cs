@@ -7,6 +7,7 @@ using MetaX.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MetaX.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace MetaX.Pages.Admin.Event
 {
@@ -22,8 +23,9 @@ namespace MetaX.Pages.Admin.Event
             _db = db;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            ViewData["Categories"] = await _db.CategoriesTable.ToListAsync();
             return Page();
         }
 

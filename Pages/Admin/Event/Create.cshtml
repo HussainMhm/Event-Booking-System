@@ -6,44 +6,46 @@
 }
 
 <div class="container float-start">
-    <h1>Create Event</h1>
+    <h1 class="mb-2">Yeni Etkinlik</h1>
     <form method="post">
         <div class="form-row">
             <div class="form-group col-md-6 mt-2">
-                <label>Title:</label>
+                <label class="mt-2">Etkinlik Adı:</label>
                 <input class="form-control" required asp-for="Event.Title" />
             </div>
             <div class="form-group col-md-6 mt-2">
-                <label>Category:</label>
+                <label class="mt-2">Kategori:</label>
                 <select class="form-select" aria-label="Default select example" required asp-for="Event.Category">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected>Seçiniz</option>
+                    @foreach (var category in ViewData["Categories"] as List<MetaX.Model.Category>)
+                    {
+                        <option value="@category.Name">@category.Name</option>
+                    }
                 </select>
             </div>
+
             <div class="form-group col-md-6 mt-2">
-                <label>Image:</label>
+                <label class="mt-2">Görsel:</label>
                 <input class="form-control" required asp-for="Event.Image" />
             </div>
         </div>
         <div class="form-group col-md-6 mt-2">
-            <label>Description:</label>
+            <label class="mt-2">Açıklama:</label>
             <textarea class="form-control" asp-for="Event.Description"></textarea>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6 mt-2">
-                <label>Location:</label>
+                <label class="mt-2">Lokasyon:</label>
                 <input class="form-control" required asp-for="Event.Location" />
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6 mt-2">
-                <label>Date:</label>
+                <label class="mt-2">Tarih:</label>
                 <input type="date" class="form-control" required asp-for="Event.Date" />
             </div>
             <div class="form-group col-md-6 mt-2">
-                <label>Price:</label>
+                <label class="mt-2">Bilet Fiyatı:</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
@@ -52,6 +54,6 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-md btn-primary mt-3">Save</button>
+        <button type="submit" class="btn btn-md btn-primary mt-4 px-4">Ekle</button>
     </form>
 </div>

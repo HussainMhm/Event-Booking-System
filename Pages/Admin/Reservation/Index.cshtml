@@ -23,8 +23,8 @@
                 <div class="col-2 text-right d-flex align-items-center">
                     <select id="filterStatus" class="form-control" name="Status">
                         <option value="">Tum Durumlar</option>
-                        <option value="Active" selected="@Model.IsStatusActive">Active</option>
-                        <option value="Finished" selected="@Model.IsStatusFinished">Finished</option>
+                        <option value="Aktif" selected="@Model.IsStatusActive">Aktif</option>
+                        <option value="Bitti" selected="@Model.IsStatusFinished">Bitti</option>
                     </select>
                 </div>
                 <div class="col-2">
@@ -47,10 +47,11 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">Reservation ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Event Name</th>
-                        <th scope="col">Reservation Date</th>
+                        <th scope="col">Reseravsyon ID</th>
+                        <th scope="col">Reservasyon Tarihi</th>
+                        <th scope="col">Kullanıcı Adı</th>
+                        <th scope="col">Etkinlik Adı</th>
+                        <th scope="col">Etkinlik Tarihi</th>
                         <th scope="col">Status</th>
                         <th scope="col">İşlem</th>
                     </tr>
@@ -60,13 +61,14 @@
                     {
                         <tr>
                             <td>@reservation.ReservationID</td>
+                            <td>@reservation.ReservationDate.ToString("MM/dd/yyyy")</td>
                             <td>@($"{reservation.User.Name} {reservation.User.Surname}")</td>
                             <td>@reservation.Event.Title</td>
-                            <td>@reservation.ReservationDate.ToString("MM/dd/yyyy")</td>
-                            <td>@(reservation.ReservationDate < DateTime.Today ? "Finished" : "Active")</td>
+                            <td>@reservation.Event.Date.ToString("MM/dd/yyyy")</td>
+                            <td>@(reservation.Event.Date < DateTime.Today ? "Bitti" : "Aktif")</td>
                             <td>
                                 <form method="post" asp-page-handler="Delete" asp-route-reservationId="@reservation.ReservationID" onsubmit="return confirmDelete(event);">
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-sm btn-danger">Kaldır</button>
                                 </form>
                             </td>
                         </tr>
@@ -78,30 +80,29 @@
 </div>
 
 
-@section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>function confirmDelete(event) {
-            event.preventDefault();
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>function confirmDelete(event) {
+        event.preventDefault();
 
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this reservation!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    event.target.submit();
-                }
-            });
-        }
-
-        function clearInput() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('eventInput').value = '';
-            document.getElementById('filterStatus').value = '';
-            document.getElementById('hiddenSubmit').click();
-        }</script>
-}
+        Swal.fire({
+            title: 'Silmek istediğinizden emin misiniz?',
+            text: 'Bu işlemi daha sonra tekrar geri alamayacaksınız.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Evet, eminim!',
+            cancelButtonText: 'Hayır, vazgeçtim!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.submit();
+            }
+        });
+    }
+    function clearInput() {
+        document.getElementById('filterStatus').value = 'Tum Durumlar';
+        document.getElementById('searchInput').value = '';
+        document.getElementById('eventInput').value = '';
+        document.getElementById('hiddenSubmit').click();
+    }
+    </script>

@@ -21,11 +21,11 @@
         <form id="searchForm" method="post" class="w-100">
             <div class="row">
                 <div class="col-lg-4 col-12">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Etkinlik ismi" name="SearchInput" value="@Model.SearchInput">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Etkinlik Adı" name="SearchInput" value="@Model.SearchInput">
                 </div>
                 <div class="col-lg-4 col-12 mt-2 mt-lg-0">
                     <select id="locationInput" class="form-control" name="LocationInput">
-                        <option>All Locations</option>
+                        <option>Tüm Lokasyonlar</option>
                         @foreach (var location in Model.EventLocations)
                         {
                             <option>@location</option>
@@ -52,7 +52,8 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">İsim</th>
+                        <th scope="col">Etkinlik Adı</th>
+                        <th scope="col">Kategori</th>
                         <th scope="col">Tarih</th>
                         <th scope="col">Fiyat</th>
                         <th scope="col">Lokasyon</th>
@@ -64,13 +65,14 @@
                     {
                         <tr>
                             <td>@eventModel.Title</td>
+                            <td>@eventModel.Category</td>
                             <td>@eventModel.Date.ToString("dd-MM-yyyy")</td>
                             <td>₺ @eventModel.Price</td>
                             <td>@eventModel.Location</td>
                             <td>
-                                <a asp-page="./Update" asp-route-id="@eventModel.EventID" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-page="./Update" asp-route-id="@eventModel.EventID" class="btn btn-sm btn-primary">Görüntüle</a>
                                 <form method="post" class="d-inline" asp-page-handler="Delete" asp-route-eventId="@eventModel.EventID" onsubmit="return confirmDelete(event);">
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-sm btn-danger">Kaldır</button>
                                 </form>
                             </td>
                         </tr>
@@ -81,30 +83,28 @@
     </div>
 </div>
 
-@section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function confirmDelete(event) {
-            event.preventDefault();
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>function confirmDelete(event) {
+        event.preventDefault();
 
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this review!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    event.target.submit();
-                }
-            });
-        }
-        function clearInput() {
-            document.getElementById('locationInput').value = 'All Locations';
-            document.getElementById('searchInput').value = '';
-            document.getElementById('hiddenSubmit').click();
-        }
-    </script>
-}
+        Swal.fire({
+            title: 'Silmek istediğinizden emin misiniz?',
+            text: 'Bu işlemi daha sonra tekrar geri alamayacaksınız.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Evet, eminim!',
+            cancelButtonText: 'Hayır, vazgeçtim!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.submit();
+            }
+        });
+    }
+    function clearInput() {
+        document.getElementById('locationInput').value = 'All Locations';
+        document.getElementById('searchInput').value = '';
+        document.getElementById('hiddenSubmit').click();
+    }</script>
+
