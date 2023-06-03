@@ -10,26 +10,33 @@
             <h2 class="text-left">Kategori Yönetimi</h2>
         </div>
         <div class="col-auto me-4">
-            <a href="/Admin/Event/Create" class="btn btn-success">
+            <a href="/Admin/Category/Create" class="btn btn-success">
                 <i class="fas fa-plus"></i> Yeni Kategori
             </a>
         </div>
     </div>
+
     <div class="row mt-5">
-        <div class="col-lg-auto col-10">
-            <input type="text" id="searchInput" class="form-control" placeholder="Kategori Adı">
-        </div>
-        <div class="col-lg-2 col-8 mt-2 mt-lg-0">
-            <a href="#" class="btn btn-primary w-100">
-                <i class="fas fa-search"></i> Ara
-            </a>
-        </div>
-        <div class="col-1 mt-2 mt-lg-0">
-            <a href="#" class="btn btn-outline-dark">
-                <i class="fas fa-times"></i>
-            </a>
-        </div>
+        <form id="searchForm" method="post" class="w-100">
+            <div class="row">
+                <div class="col-lg-3 col-12">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Kategori Adı" name="SearchInput" value="@Model.SearchInput">
+                </div>
+                <div class="col-lg-2 col-8 mt-2 mt-lg-0">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Ara
+                    </button>
+                </div>
+                <div class="col-1 mt-2 mt-lg-0">
+                    <button type="button" onclick="clearInput()" class="btn btn-outline-dark">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <button id="hiddenSubmit" type="submit" style="display: none;"></button>
+            </div>
+        </form>
     </div>
+
     <div class="row mt-4">
         <div class="col-md-12">
             <table class="table">
@@ -60,16 +67,14 @@
     </div>
 </div>
 
-
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function confirmDelete(event) {
+    <script>function confirmDelete(event) {
             event.preventDefault();
 
             Swal.fire({
                 title: 'Are you sure?',
-                text: 'You will not be able to recover this review!',
+                text: 'You will not be able to recover this category!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -81,5 +86,9 @@
                 }
             });
         }
-    </script>
+
+        function clearInput() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('hiddenSubmit').click();
+        }</script>
 }

@@ -21,9 +21,45 @@ namespace MetaX.Pages.Admin.Reservation
 
         public IList<Model.Reservation> Reservations { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string UserName { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string EventName { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string Status { get; set; }
+
+        public bool IsStatusActive => Status == "Active";
+        public bool IsStatusFinished => Status == "Finished";
+
         public async Task<IActionResult> OnGetAsync()
         {
-            Reservations = await _context.ReservationsTable
+            var query = _context.ReservationsTable.AsQueryable();
+
+            if (!string.IsNullOrEmpty(UserName))
+            {
+                query = query.Where(r => r.User.Name.Contains(UserName));
+            }
+
+            if (!string.IsNullOrEmpty(EventName))
+            {
+                query = query.Where(r => r.Event.Title.Contains(EventName));
+            }
+
+            if (!string.IsNullOrEmpty(Status))
+            {
+                if (Status == "Active")
+                {
+                    query = query.Where(r => r.ReservationDate >= DateTime.Today);
+                }
+                else if (Status == "Finished")
+                {
+                    query = query.Where(r => r.ReservationDate < DateTime.Today);
+                }
+            }
+
+            Reservations = await query
                 .Include(r => r.User)
                 .Include(r => r.Event)
                 .ToListAsync();
@@ -42,4 +78,6 @@ namespace MetaX.Pages.Admin.Reservation
             return RedirectToPage();
         }
     }
+
+
 }

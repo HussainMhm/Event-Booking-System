@@ -1,6 +1,9 @@
 ﻿using MetaX.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MetaX.Pages.Admin.Review
 {
@@ -15,9 +18,20 @@ namespace MetaX.Pages.Admin.Review
             _db = db;
         }
 
-        public void OnGet()
+        public void OnGet(string eventName, int? rating)
         {
-            ReviewListing = _db.ReviewsTable.ToList();
+            IQueryable<Model.Review> query = _db.ReviewsTable
+                .Include(r => r.Event)
+                .Include(r => r.User)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(eventName))
+                query = query.Where(r => r.Event.Title.Contains(eventName));
+
+            if (rating.HasValue)
+                query = query.Where(r => r.Rating == rating.Value);
+
+            ReviewListing = query.ToList();
         }
 
         public IActionResult OnPostDelete(int reviewId)

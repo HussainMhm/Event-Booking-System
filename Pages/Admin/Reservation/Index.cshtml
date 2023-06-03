@@ -11,36 +11,36 @@
         </div>
     </div>
 
-
     <div class="row mt-5">
-        <div class="col-3">
-            <input type="text" id="searchInput" class="form-control" placeholder="Kullancıcı Adı">
-        </div>
-        <div class="col-3">
-            <input type="text" id="locationInput" class="form-control" placeholder="Etkinlik Adı">
-        </div>
-        <div class="col-2 text-right d-flex align-items-center">
-            <select id="filterStatus" class="form-control">
-                <option value="">Hiçbiri</option>
-                <option value="Active">Active</option>
-                <option value="Finished">Finished</option>
-            </select>
-        </div>
+        <form id="searchForm" method="get" class="w-100">
+            <div class="row">
+                <div class="col-3">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Kullancı Adı" name="UserName" value="@Model.UserName">
+                </div>
+                <div class="col-3">
+                    <input type="text" id="eventInput" class="form-control" placeholder="Etkinlik Adı" name="EventName" value="@Model.EventName">
+                </div>
+                <div class="col-2 text-right d-flex align-items-center">
+                    <select id="filterStatus" class="form-control" name="Status">
+                        <option value="">Tum Durumlar</option>
+                        <option value="Active" selected="@Model.IsStatusActive">Active</option>
+                        <option value="Finished" selected="@Model.IsStatusFinished">Finished</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Ara
+                    </button>
+                </div>
+                <div class="col-auto ">
+                    <button type="button" onclick="clearInput()" class="btn btn-outline-dark">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <button id="hiddenSubmit" type="submit" style="display: none;"></button>
+        </form>
     </div>
-
-    <div class="row mt-5 ">
-        <div class="col-2">
-            <a href="#" class="btn btn-primary w-100">
-                <i class="fas fa-search"></i> Ara
-            </a>
-        </div>
-        <div class="col-auto ">
-            <a href="#" class="btn btn-outline-dark">
-                <i class="fas fa-times"></i>
-            </a>
-        </div>
-    </div>
-
 
     <div class="row mt-4">
         <div class="col-md-12">
@@ -80,13 +80,12 @@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function confirmDelete(event) {
+    <script>function confirmDelete(event) {
             event.preventDefault();
 
             Swal.fire({
                 title: 'Are you sure?',
-                text: 'You will not be able to recover this review!',
+                text: 'You will not be able to recover this reservation!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -98,5 +97,11 @@
                 }
             });
         }
-    </script>
+
+        function clearInput() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('eventInput').value = '';
+            document.getElementById('filterStatus').value = '';
+            document.getElementById('hiddenSubmit').click();
+        }</script>
 }

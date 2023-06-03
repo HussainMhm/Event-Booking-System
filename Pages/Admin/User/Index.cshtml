@@ -11,33 +11,32 @@
         </div>
     </div>
 
-    <div class="row mt-4">
-        <div class="col-lg-auto col-12 mt-1">
-            <input type="text" id="searchInput" class="form-control" placeholder="Kullanıcı Adı">
+    <form id="searchForm" method="get">
+        <div class="row mt-4">
+            <div class="col-lg-auto col-12 mt-1">
+                <input type="text" id="nameInput" class="form-control" placeholder="Ad" name="Name" value="@Model.Name">
+            </div>
+            <div class="col-lg-auto col-12 mt-1">
+                <input type="text" id="surnameInput" class="form-control" placeholder="Soyad" name="Surname" value="@Model.Surname">
+            </div>
+            <div class="col-lg-auto col-12 mt-1">
+                <input type="text" id="emailInput" class="form-control" placeholder="Mail" name="Email" value="@Model.Email">
+            </div>
+            <div class="col-lg-auto col-12 mt-1">
+                <input type="text" id="phoneInput" class="form-control" placeholder="Telefon Numarası" name="PhoneNumber" value="@Model.PhoneNumber">
+            </div>
+            <div class="col-lg-2 col-8">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-search"></i> Ara
+                </button>
+            </div>
+            <div class="col-auto mt-2 mt-lg-0">
+                <button type="button" onclick="clearInput()" class="btn btn-outline-dark">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
-        <div class="col-lg-auto col-12 mt-1">
-            <input type="text" id="locationInput" class="form-control" placeholder="Kullanıcı Soyadı">
-        </div>
-        <div class="col-lg-auto col-12 mt-1">
-            <input type="text" id="locationInput" class="form-control" placeholder="Kullanıcı Maili">
-        </div>
-        <div class="col-lg-auto col-12 mt-1">
-            <input type="text" id="locationInput" class="form-control" placeholder="Kullanıcı Telefon Numarası">
-        </div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col-lg-2 col-8">
-            <a href="#" class="btn btn-primary w-100">
-                <i class="fas fa-search"></i> Ara
-            </a>
-        </div>
-        <div class="col-1 mt-2 mt-lg-0">
-            <a href="#" class="btn btn-outline-dark">
-                <i class="fas fa-times"></i>
-            </a>
-        </div>
-    </div>
+    </form>
 
     <div class="row mt-4">
         <div class="col-md-12">
@@ -76,8 +75,7 @@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function confirmDelete(event) {
+    <script>function confirmDelete(event) {
             event.preventDefault();
 
             Swal.fire({
@@ -94,5 +92,12 @@
                 }
             });
         }
-    </script>
+
+        function clearInput() {
+            document.getElementById('nameInput').value = '';
+            document.getElementById('surnameInput').value = '';
+            document.getElementById('emailInput').value = '';
+            document.getElementById('phoneInput').value = '';
+            document.getElementById('searchForm').submit();
+        }</script>
 }
