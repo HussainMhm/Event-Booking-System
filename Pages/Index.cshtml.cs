@@ -29,7 +29,7 @@ namespace MetaX.Pages
                 .Include(r => r.User)  // Include the related User data
                 .Include(r => r.Event)  // Include the related Event data
                 .OrderByDescending(r => r.Rating)
-                .Take(2)
+                .Take(5)
                 .ToListAsync();
 
             EarlyEvents = await _db.EventsTable
