@@ -26,6 +26,8 @@ namespace MetaX.Pages
         public async Task OnGetAsync()
         {
             PopulerReviews = await _db.ReviewsTable
+                .Include(r => r.User)  // Include the related User data
+                .Include(r => r.Event)  // Include the related Event data
                 .OrderByDescending(r => r.Rating)
                 .Take(2)
                 .ToListAsync();
