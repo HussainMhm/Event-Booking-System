@@ -3,7 +3,7 @@ using MetaX.Model;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MetaX
+namespace MetaX.Model
 {
     public class Reservation
     {
