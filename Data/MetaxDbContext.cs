@@ -27,8 +27,5 @@ namespace MetaX.Data
                 .Property(p => p.Price)
                 .HasColumnType("decimal");
         }
-
     }
-
-	
 }
