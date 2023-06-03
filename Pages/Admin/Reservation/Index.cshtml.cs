@@ -30,5 +30,16 @@ namespace MetaX.Pages.Admin.Reservation
 
             return Page();
         }
+
+        public IActionResult OnPostDelete(int reservationId)
+        {
+            var reservation = _context.ReservationsTable.Find(reservationId);
+            if (reservation != null)
+            {
+                _context.ReservationsTable.Remove(reservation);
+                _context.SaveChanges();
+            }
+            return RedirectToPage();
+        }
     }
 }
