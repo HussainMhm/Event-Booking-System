@@ -44,6 +44,7 @@
                     <tr>
                         <th scope="col">İsim</th>
                         <th scope="col">Tarih</th>
+                        <th scope="col">Fiyat</th>
                         <th scope="col">Lokasyon</th>
                         <th scope="col">İşlem</th>
                     </tr>
@@ -53,7 +54,8 @@
                     {
                         <tr>
                             <td>@eventModel.Title</td>
-                            <td>@eventModel.Date.ToShortDateString()</td>
+                            <td>@eventModel.Date.ToString("dd-MM-yyyy")</td>
+                            <td>₺ @eventModel.Price</td>
                             <td>@eventModel.Location</td>
                             <td>
                                 <a asp-page="./Update" asp-route-id="@eventModel.EventID" class="btn btn-sm btn-primary">Edit</a>
