@@ -26,16 +26,8 @@
                 <option value="Finished">Finished</option>
             </select>
         </div>
-                <div class="col-auto">
-        <label class="ms-2 mt-1 text-muted">Fiyat</label>
-        </div>
-        <div class="col-2 mt-3 pe-5">
-            <div id="priceSlider">
-                <input type="hidden" id="priceRange" name="PriceRange" value="" />
-            </div>
-        </div>
     </div>
-       
+
     <div class="row mt-5 ">
         <div class="col-2">
             <a href="#" class="btn btn-primary w-100">
@@ -55,65 +47,28 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">Username</th>
                         <th scope="col">Reservation ID</th>
+                        <th scope="col">Username</th>
                         <th scope="col">Event Name</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">Reservation Date</th>
                         <th scope="col">Status</th>
                         <th scope="col">İşlem</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>User1</td>
-                        <td>123456</td>
-                        <td>Event 1</td>
-                        <td>$50</td>
-                        <td>Active</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger">İptal Et</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>User2</td>
-                        <td>789012</td>
-                        <td>Event 2</td>
-                        <td>$75</td>
-                        <td>Active</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger">İptal Et</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>User3</td>
-                        <td>345678</td>
-                        <td>Event 3</td>
-                        <td>$100</td>
-                        <td>Finished</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger">İptal Et</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>User4</td>
-                        <td>901234</td>
-                        <td>Event 4</td>
-                        <td>$120</td>
-                        <td>Active</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger">İptal Et</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>User5</td>
-                        <td>567890</td>
-                        <td>Event 5</td>
-                        <td>$80</td>
-                        <td>Finished</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger">İptal Et</button>
-                        </td>
-                    </tr>
+                    @foreach (var reservation in Model.Reservations)
+                    {
+                        <tr>
+                            <td>@reservation.ReservationID</td>
+                            <td>@($"{reservation.User.Name} {reservation.User.Surname}")</td>
+                            <td>@reservation.Event.Title</td>
+                            <td>@reservation.ReservationDate.ToString("MM/dd/yyyy")</td>
+                            <td>@(reservation.ReservationDate < DateTime.Today ? "Finished" : "Active")</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger">İptal Et</button>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

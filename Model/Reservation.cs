@@ -25,7 +25,5 @@ namespace MetaX.Model
         [ForeignKey("UserID")]
         public User User { get; set; }
     }
-
-
 }
 
