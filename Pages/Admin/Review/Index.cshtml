@@ -16,9 +16,9 @@
         <div class="col-auto">
             <input type="text" id="searchInput" class="form-control" placeholder="Etkinlik Adı">
         </div>
-        <div class="col-auto ">
+        <div class="col-auto col-md-2">
             <select id="filterStatus" class="form-control">
-                <option value="">Puan</option>
+                <option value="">Puan Seçiniz</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -45,7 +45,6 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Etkinlik Adı</th>
                         <th scope="col">Kullanıcı ID</th>
                         <th scope="col">Puan</th>
@@ -57,7 +56,6 @@
                     @foreach (var review in Model.ReviewListing)
                     {
                         <tr>
-                            <td>@review.ReviewID</td>
                             <td>@review.EventID</td>
                             <td>@review.UserID</td>
                             <td>@review.Rating</td>
