@@ -24,6 +24,4 @@ namespace MetaX.Pages
             Event = await _context.EventsTable.FirstOrDefaultAsync(e => e.EventID == id);
         }
     }
-
 }
-

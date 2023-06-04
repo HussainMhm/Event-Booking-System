@@ -1,5 +1,6 @@
 ﻿@page
 @model MetaX.Pages.EventDetailsModel
+@inject MetaX.Pages.LoginModel Login
 @{
 }
 
@@ -39,9 +40,19 @@
                                 <strong>BİLET FİYATI</strong>
                                 <span>₺ @Model.Event.Price.ToString("F2")</span>
                             </li>
-                            <li>
-                                <a href="#" class="btn-visit align-self-start">Bilet Al</a>
-                            </li>
+                            @if (Login.IsUserLoggedIn())
+                            {
+                                <li>
+                                    <a href="/Payment?eventId=@Model.Event.EventID" class="btn-visit align-self-start">Bilet Al</a>
+
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/Login" class="btn btn-danger align-self-start">Bilet almak için giriş yapınız</a>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
