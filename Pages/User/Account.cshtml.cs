@@ -2,23 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MetaX.Data;
+using MetaX.Model;
+using MetaX.Pages.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace MetaX.Pages.User
 {
-	public class ProfileModel : PageModel
-    {
+	public class AccountModel : PageModel
+	{
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly MetaxDbContext _context;
 
-        public ProfileModel(IHttpContextAccessor httpContextAccessor)
+        public AccountModel(IHttpContextAccessor httpContextAccessor, MetaxDbContext context)
         {
             _httpContextAccessor = httpContextAccessor;
+            _context = context;
         }
 
-        public UserModel User { get; set; }
+        [BindProperty]
+        public Model.User _User { get; set; }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             var userID = _httpContextAccessor.HttpContext.Session.GetString("UserID");
             var userName = _httpContextAccessor.HttpContext.Session.GetString("UserName");
@@ -28,7 +35,7 @@ namespace MetaX.Pages.User
 
             if (userID != null && userName != null && userSurname != null)
             {
-                User = new UserModel
+                _User = new Model.User
                 {
                     UserID = int.Parse(userID),
                     Name = userName,
@@ -36,17 +43,14 @@ namespace MetaX.Pages.User
                     Email = userEmail,
                     PhoneNumber = userPhoneNumber
                 };
+
+                return Page();
             }
+            return RedirectToPage("/Login"); // Kullanıcı giriş yapmadıysa giriş sayfasına yönlendirilir.
+
         }
-    }
 
-    public class UserModel
-    {
-        public int UserID { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
     }
+  
 }
+

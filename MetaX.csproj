@@ -32,7 +32,6 @@
     <Folder Include="Data\" />
     <Folder Include="Model\" />
     <Folder Include="Pages\Event\" />
-    <Folder Include="Pages\User\" />
     <Folder Include="Pages\Review\" />
   </ItemGroup>
 </Project>

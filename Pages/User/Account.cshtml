@@ -1,11 +1,54 @@
 ﻿@page
-@model MetaX.Pages.User.ProfileModel
+@model MetaX.Pages.User.AccountModel
 @{
 }
-
-<div class="container">
-    <h1>Hesap Bilgileri</h1>
-    <p>Hoş geldiniz, @Model.User.Name @Model.User.Surname!</p>
-    <p>E-posta: @Model.User.Email</p>
-    <p>Telefon: @Model.User.PhoneNumber</p>
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+    <div class="page-header d-flex align-items-center"
+         style="background-image: url('')">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2>Hesabım</h2>
+                    <p>
+                        Odio et unde deleniti. Deserunt numquam
+                        exercitationem. Officiis quo odio sint voluptas
+                        consequatur ut a odio voluptatem. Sit dolorum
+                        debitis veritatis natus dolores. Quasi ratione sint.
+                        Sit quaerat ipsum dolorem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="container">
+            <ol>
+                <li><a href="index.html">Home</a></li>
+                <li>Hesabım</li>
+            </ol>
+        </div>
+    </nav>
 </div>
+<!-- End Breadcrumbs -->
+
+<div class="container text-center mb-5 mt-2">
+    <div class="row">
+        <div class="col btn btn-light rounded-5 m-2">
+            <a asp-page="./Profile" asp-route-id="@Model._User.UserID">
+            <section>
+                    <h1>Hesap Bilgilerim</h1>
+                </section>
+            </a>
+        </div>
+        <div class="col btn btn-light rounded-5 m-2">
+            <a href="~/User/Reservation">
+            <section>
+                <h1>Rezervasyonlarım</h1>
+            </section>
+            </a>
+        </div>
+    </div>
+</div>
+
+
