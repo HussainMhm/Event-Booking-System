@@ -1,9 +1,9 @@
 ﻿@page
+@using MetaX.Pages
 @model MetaX.Pages.LoginModel
 @{
     ViewData["Title"] = "Giriş";
 }
-
 
 <style>
     .custom-margin {
@@ -20,37 +20,33 @@
                     <h5 class="card-title text-center mb-5 fw-light fs-5">
                         GİRİŞ
                     </h5>
-                    <form>
+                    <form method="post">
                         <div class="form-floating mb-3">
-                            <input
-                                type="email"
-                                class="form-control"
-                                id="floatingInput"
-                            />
+                            <input type="email"
+                                   class="form-control"
+                                   id="floatingInput"
+                                   name="Email" />
                             <label for="floatingInput">Mail</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input
-                                type="password"
-                                class="form-control"
-                                id="floatingPassword"
-                            />
+                            <input type="password"
+                                   class="form-control"
+                                   id="floatingPassword"
+                                   name="Password" />
                             <label for="floatingPassword">Şifre</label>
                         </div>
 
                         <div class="d-grid">
-                            <button
-                                class="btn btn-primary btn-login text-uppercase fw-bold"
-                                type="submit"
-                            >
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                    type="submit">
                                 GİRİŞ YAP
                             </button>
                         </div>
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    Üye değil misiniz? <a href="#">Kaydol</a>
+                    Üye değil misiniz? <a href="/signup">Kaydol</a>
                 </div>
             </div>
         </div>

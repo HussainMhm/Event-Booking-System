@@ -19,52 +19,50 @@
                     <h5 class="card-title text-center mb-5 fw-light fs-5">
                         KAYDOL
                     </h5>
-                    <form>
+                    <form method="post">
                         <div class="form-floating mb-3">
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="floatingName"
-                            />
+                            <input type="text"
+                                   class="form-control"
+                                   id="floatingName"
+                                   name="Name"
+                                   asp-for="User.Name" />
                             <label for="floatingName">Ad</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="floatingSurname"
-                            />
+                            <input type="text"
+                                   class="form-control"
+                                   id="floatingSurname"
+                                   name="Surname"
+                                   asp-for="User.Surname" />
                             <label for="floatingSurname">Soyad</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input
-                                type="tel"
-                                class="form-control"
-                                id="floatingPhoneNumber"
-                            />
+                            <input type="tel"
+                                   class="form-control"
+                                   id="floatingPhoneNumber"
+                                   name="PhoneNumber"
+                                   asp-for="User.PhoneNumber" />
                             <label for="floatingPhoneNumber">Telefon Numarası</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input
-                                type="email"
-                                class="form-control"
-                                id="floatingEmail"
-                            />
+                            <input type="email"
+                                   class="form-control"
+                                   id="floatingEmail"
+                                   name="Email"
+                                   asp-for="User.Email" />
                             <label for="floatingEmail">Mail</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input
-                                type="password"
-                                class="form-control"
-                                id="floatingPassword"
-                            />
+                            <input type="password"
+                                   class="form-control"
+                                   id="floatingPassword"
+                                   name="Password"
+                                   asp-for="User.Password" />
                             <label for="floatingPassword">Şifre</label>
                         </div>
                         <div class="d-grid">
-                            <button
-                                class="btn btn-primary btn-login text-uppercase fw-bold"
-                                type="submit"
-                            >
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                    type="submit">
                                 Üye Ol
                             </button>
                         </div>

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject MetaX.Pages.LoginModel Login
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -39,8 +40,21 @@
                 <ul>
                     <li><a href="/">Anasayfa</a></li>
                     <li><a href="/Events">Etkinlikler</a></li>
-                    <li><a href="/Login">Giriş Yap</a></li>
-                    <li><a href="/Signup">Kaydol</a></li>
+                    @if (Login.IsUserLoggedIn())
+                    {
+                        <li><a href="/user/account">Hesabım</a></li>
+                        <li>
+                        <form id="logoutForm" method="post" asp-page="/User/Logout" asp-page-handler="Logout">
+                            <button type="submit" class="nav-link btn btn-link">Çıkış Yap</button>
+                        </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li><a href="/Login">Giriş Yap</a></li>
+                        <li><a href="/Signup">Kaydol</a></li>
+                    }
+
                 </ul>
             </nav><!-- .navbar -->
 
@@ -51,9 +65,9 @@
     </header><!-- End Header -->
     <!-- End Header -->
 
-
-            @RenderBody()
-
+            
+        @RenderBody()
+          
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
 
