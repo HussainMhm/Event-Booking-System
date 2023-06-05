@@ -38,6 +38,10 @@ namespace MetaX.Pages
                 eventsQuery = eventsQuery.Where(e => e.Category == category);
             }
 
+            // Filter events by active events (events that haven't yet been held)
+            DateTime today = DateTime.Today;
+            eventsQuery = eventsQuery.Where(e => e.Date >= today);
+
             // Calculate total pages
             var count = await eventsQuery.CountAsync();
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
