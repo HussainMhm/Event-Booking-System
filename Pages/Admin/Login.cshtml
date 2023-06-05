@@ -1,0 +1,54 @@
+﻿@page
+@model MetaX.Pages.Admin.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-3 mx-auto">
+        <div class="jumbotron">
+            <h1 class="text-center mb-3">Admin Login</h1>
+            <form method="post">
+                @*<div asp-validation-summary="All" class="text-danger"></div>*@
+                <div class="form-group">
+                    <label asp-for="AdminUser.Username"></label>
+                    <input asp-for="AdminUser.Username" class="form-control" />
+                    <span asp-validation-for="AdminUser.Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AdminUser.Password"></label>
+                    <input type="password" asp-for="AdminUser.Password" class="form-control" />
+                    <span asp-validation-for="AdminUser.Password" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }
+</body>
+</html>
