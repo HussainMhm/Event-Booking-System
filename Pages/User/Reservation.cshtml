@@ -37,55 +37,117 @@
     <br />
     <h2>Aktif Rezervasyonlarim</h2>
 </div>
-<div class="container border border-1 rounded-4 my-5">
-    <div class="row">
-        <div class="col-3">
-            <img src="/assets/img/blog/blog-1.jpg" class="rounded-start-4 img-fluid " alt="...">
-        </div>
-        <div class="col-6">
-            <h3 class="card-title mt-4">Event Title</h3>
-            <i>categoty</i>
-            <p class="card-text my-4">laskjdjkasjkjdsjkdsf jksjsdkj dsjkfjsd fjks djkjkds jfjjsdkjf jksdf </p>
-            <i>50 $</i>
-        </div>
-        <div class="col-3 text-dark bg-dark-subtle rounded-end-4 text-center">
-            <h5 class="mt-5">Etkinlik Tarihi</h5>
-            <div class="">
-                <p>01-01-2023</p>
+
+@foreach (var reservations in Model.Reservations)
+{
+    if (reservations.Event.Date.Date >= DateTime.Today)
+    {
+        <div class="container border border-1 rounded-4 my-5">
+            <div class="row">
+                <div class="col-4">
+                    <img src="@reservations.Event.Image" class="rounded-start-4 img-fluid " alt="...">
+                </div>
+                <div class="col-6">
+                    
+                    <a asp-page="/EventDetails" asp-route-id="@reservations.Event.EventID">
+                    <h3 class="card-title mt-4">@reservations.Event.Title</h3>
+                    </a>
+                    <div class="mb-2">
+                        <i class="text-dark">@reservations.Event.Category</i>
+                    </div>
+                    
+                    @{
+                        string eventDate = reservations.Event.Description;
+                        string truncatedEventDate = eventDate.Length > 200 ? eventDate.Substring(0, 200) : eventDate;
+                    }
+                    <p>@truncatedEventDate ...</p>
+
+                    <p style="color:#008374; font-size:30px;">@reservations.Event.Price TL</p>
+                    
+                </div>
+                <div class="col-2 text-dark bg-dark-subtle rounded-end-4 text-center">
+                    <h5 class="mt-5">Etkinlik Tarihi</h5>
+                    <div class="">
+                        <p>@reservations.Event.Date.ToString("dd-MM-yyyy")</p>
+                    </div>
+                    <div class="mt-5 mb-2">
+                        <form method="post" class="d-inline" asp-page-handler="Delete" asp-route-reservationID="@reservations.ReservationID" onsubmit="return confirmDelete(event);">
+                            <button type="submit" class="btn btn-lg btn-danger">İptal et</button>
+                        </form>
+                    </div>
+
+                </div>
             </div>
-            <div class="mt-5 mb-2">
-                <button class="btn btn-danger">Iptal et</button>
-            </div>
-            
         </div>
-    </div>
-</div>
+    }
+}
+
 
 <div class="container position-relative ">
     <br />
     <h2>Geçmiş Rezervasyonlarim</h2>
 </div>
 
+@foreach (var reservations in Model.Reservations)
+{
+    if (reservations.Event.Date.Date < DateTime.Today)
+    {
 <div class="container border border-1 rounded-4 my-5">
     <div class="row">
         <div class="col-3">
-            <img src="/assets/img/blog/blog-1.jpg" class="rounded-start-4 img-fluid " alt="...">
+                    <img src="@reservations.Event.Image" class="rounded-start-4 img-fluid " alt="...">
         </div>
         <div class="col-6">
-            <h3 class="card-title mt-4">Event Title</h3>
+                    <h3 class="card-title mt-4">@reservations.Event.Title</h3>
             <i>categoty</i>
-            <p class="card-text my-4">laskjdjkasjkjdsjkdsf jksjsdkj dsjkfjsd fjks djkjkds jfjjsdkjf jksdf </p>
-            <i>50 $</i>
+                    @{
+                        string eventDate = reservations.Event.Description;
+                        string truncatedEventDate = eventDate.Length > 200 ? eventDate.Substring(0, 200) : eventDate;
+                    }
+                    <p>@truncatedEventDate ...</p>
+                    <i>50 $</i>
         </div>
         <div class="col-3 text-dark bg-dark-subtle rounded-end-4 text-center">
             <br />
             <br />
             <h5 class="mt-4 ">Etkinlik Tarihi</h5>
             <div class="">
-                <p>01-01-2023</p>
+                        <p>@reservations.Event.Date.ToString("dd-MM-yyyy")</p>
             </div>
 
 
         </div>
     </div>
 </div>
+
+    }
+}
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(event) {
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Silmek istediğinizden emin misiniz?',
+            text: 'Bu işlemi daha sonra tekrar geri alamayacaksınız.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Evet, eminim!',
+            cancelButtonText: 'Hayır, vazgeçtim!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.submit();
+            }
+        });
+    }
+    function clearInput() {
+        document.getElementById('locationInput').value = 'All Locations';
+        document.getElementById('searchInput').value = '';
+        document.getElementById('hiddenSubmit').click();
+    }</script>
+
