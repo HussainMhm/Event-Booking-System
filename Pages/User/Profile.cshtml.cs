@@ -33,8 +33,9 @@ namespace MetaX.Pages.User
                     Name = User.Name,
                     Surname = User.Surname,
                     Email = User.Email,
-                    PhoneNumber = User.PhoneNumber
-            };
+                    PhoneNumber = User.PhoneNumber,
+                    Password = User.Password
+                };
                 return Page();
             }
 
@@ -42,20 +43,31 @@ namespace MetaX.Pages.User
             return RedirectToPage("/Login"); // Kullanıcı giriş yapmadıysa giriş sayfasına yönlendirilir.
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.UsersTable.Update(User);
-            _context.SaveChanges();
+            var user = await _context.UsersTable.FindAsync(User.UserID);
 
-            return RedirectToPage("/User/Account");
-            ;
+            if (user != null)
+
+            {
+                user.UserID = User.UserID;
+                user.Name = User.Name;
+                user.Surname = User.Surname;
+                user.Email = User.Email;
+                user.PhoneNumber = User.PhoneNumber;
+                user.Password = User.Password;
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToPage("/User/Account");
+            }
+
+            return RedirectToPage("/Login");
         }
     }
 }

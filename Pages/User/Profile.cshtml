@@ -3,9 +3,42 @@
 @{
 }
 
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+    <div class="page-header d-flex align-items-center"
+         style="background-image: url('')">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2>Hesap Bilgilerim</h2>
+                    <p>
+                        Odio et unde deleniti. Deserunt numquam
+                        exercitationem. Officiis quo odio sint voluptas
+                        consequatur ut a odio voluptatem. Sit dolorum
+                        debitis veritatis natus dolores. Quasi ratione sint.
+                        Sit quaerat ipsum dolorem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="container">
+            <ol>
+                <li><a href="index.html">Home</a></li>
+                <li>Hesap Bilgilerim</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+<!-- End Breadcrumbs -->
 <div class="container">
     <h1>Hesap Bilgileri</h1>
     <form method="post">
+        <div class="mb-3">
+            <label for="UserID" class="form-label">UserID</label>
+            <input type="text" id="UserID" class="form-control" asp-for="User.UserID" readonly>
+        </div>
         <div class="mb-3">
             <label for="Name" class="form-label">Ad</label>
             <input type="text" id="Name" class="form-control" asp-for="User.Name" required>
@@ -21,6 +54,10 @@
         <div class="mb-3">
             <label for="PhoneNumber" class="form-label">Telefon</label>
             <input type="text" id="PhoneNumber" class="form-control" asp-for="User.PhoneNumber" required>
+        </div>
+        <div class="mb-3">
+            <label for="Password" class="form-label">Password</label>
+            <input type="text" id="Password" class="form-control" asp-for="User.Password" required>
         </div>
         <button type="submit" class="btn btn-primary">Güncelle</button>
     </form>
