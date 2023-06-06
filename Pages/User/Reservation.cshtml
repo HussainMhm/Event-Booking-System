@@ -28,110 +28,86 @@
 
 <div class="container position-relative my-5">
     <h2>Aktif Rezervasyonlarım</h2>
-    @foreach (var reservations in Model.Reservations)
-    {
-        if (reservations.Event.Date.Date >= DateTime.Today)
-        {
-            <div class="container border border-1 rounded-4 my-5">
-                <div class="row">
-                    <div class="col-4">
-                        <img src="@reservations.Event.Image" class="rounded-start-4 img-fluid " alt="...">
-                    </div>
-                    <div class="col-6">
-
-                        <a asp-page="/EventDetails" asp-route-id="@reservations.Event.EventID">
-                            <h3 class="card-title mt-4">@reservations.Event.Title</h3>
-                        </a>
-                        <div class="mb-2">
-                            <i class="text-dark">@reservations.Event.Category</i>
-                        </div>
-
-                        @{
-                            string eventDate = reservations.Event.Description;
-                            string truncatedEventDate = eventDate.Length > 200 ? eventDate.Substring(0, 200) : eventDate;
-                        }
-                        <p>@truncatedEventDate ...</p>
-
-                        <p style="color:#008374; font-size:30px;">@reservations.Event.Price TL</p>
-
-                    </div>
-                    <div class="col-2 text-dark bg-dark-subtle rounded-end-4 text-center">
-                        <h5 class="mt-5">Etkinlik Tarihi</h5>
-                        <div class="">
-                            <p>@reservations.Event.Date.ToString("dd-MM-yyyy")</p>
-                        </div>
-                        <div class="mt-5 mb-2">
-                            <form method="post" class="d-inline" asp-page-handler="Delete" asp-route-reservationID="@reservations.ReservationID" onsubmit="return confirmDelete(event);">
-                                <button type="submit" class="btn btn-lg btn-danger">İptal et</button>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        }
-    }
     @if (Model.Reservations.Count == 0)
     {
         <div class="alert alert-danger my-4" role="alert">
-            Herhangi bir reservasyonunuz bulunmamaktadır.
+            Herhangi bir aktif rezervasyonunuz bulunmamaktadır.
+        </div>
+    }
+    @foreach (var reservation in Model.Reservations.Where(r => r.Event.Date.Date >= DateTime.Today))
+    {
+        <div class="container border border-1 rounded-4 my-5">
+            <div class="row">
+                <div class="col-4">
+                    <img src="@reservation.Event.Image" class="rounded-start-4" style="width: 100%; height: 250px; object-fit: cover;" alt="...">
+                </div>
+                <div class="col-6">
+                    <a asp-page="/EventDetails" asp-route-id="@reservation.Event.EventID">
+                        <h3 class="card-title mt-4">@reservation.Event.Title</h3>
+                    </a>
+                    <div class="mb-2">
+                        <i class="text-dark">@reservation.Event.Category</i>
+                    </div>
+                    <p>@(reservation.Event.Description.Length > 200 ? reservation.Event.Description.Substring(0, 200) : reservation.Event.Description) ...</p>
+                    <h3 style="color:#008374;">₺ @reservation.Event.Price</h3>
+                </div>
+                <div class="col-2 text-dark bg-light rounded-end-4 text-center">
+                    <h5 class="mt-5">Etkinlik Tarihi</h5>
+                    <div class="">
+                        <p>@reservation.Event.Date.ToString("dd-MM-yyyy")</p>
+                    </div>
+                    <div class="mt-5 mb-2">
+                        <form method="post" class="d-inline" asp-page-handler="Delete" asp-route-reservationID="@reservation.ReservationID" onsubmit="return confirmDelete(event);">
+                            <button type="submit" class="btn btn-lg btn-danger">İptal et</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     }
 </div>
-
-
 
 
 <div class="container position-relative mb-5">
     <h2>Geçmiş Rezervasyonlarım</h2>
-    @foreach (var reservations in Model.Reservations)
+    @if (!Model.Reservations.Any(r => r.Event.Date.Date < DateTime.Today))
     {
-        if (reservations.Event.Date.Date < DateTime.Today)
+        <div class="alert alert-danger my-4" role="alert">
+            Herhangi bir geçmiş rezervasyonunuz bulunmamaktadır.
+        </div>
+    }
+    else
+    {
+        @foreach (var reservation in Model.Reservations.Where(r => r.Event.Date.Date < DateTime.Today))
         {
             <div class="container border border-1 rounded-4 my-5">
                 <div class="row">
                     <div class="col-3">
-                        <img src="@reservations.Event.Image" class="rounded-start-4 img-fluid " alt="...">
+                        <img src="@reservation.Event.Image" class="rounded-start-4 img-fluid" alt="...">
                     </div>
                     <div class="col-6">
-                        <h3 class="card-title mt-4">@reservations.Event.Title</h3>
-                        <i>categoty</i>
-                        @{
-                            string eventDate = reservations.Event.Description;
-                            string truncatedEventDate = eventDate.Length > 200 ? eventDate.Substring(0, 200) : eventDate;
-                        }
-                        <p>@truncatedEventDate ...</p>
-                        <i>50 $</i>
+                        <h3 class="card-title mt-4">@reservation.Event.Title</h3>
+                        <i>@reservation.Event.Category</i>
+                        <p>@(reservation.Event.Description.Length > 200 ? reservation.Event.Description.Substring(0, 200) : reservation.Event.Description) ...</p>
+                        <i>@reservation.Event.Price $</i>
                     </div>
                     <div class="col-3 text-dark bg-dark-subtle rounded-end-4 text-center">
                         <br />
                         <br />
-                        <h5 class="mt-4 ">Etkinlik Tarihi</h5>
+                        <h5 class="mt-4">Etkinlik Tarihi</h5>
                         <div class="">
-                            <p>@reservations.Event.Date.ToString("dd-MM-yyyy")</p>
+                            <p>@reservation.Event.Date.ToString("dd-MM-yyyy")</p>
                         </div>
-
-
                     </div>
                 </div>
             </div>
         }
     }
-    @if (Model.Reservations.Count == 0)
-    {
-        <div class="alert alert-danger my-4" role="alert">
-            Herhangi bir reservasyonunuz bulunmamaktadır.
-        </div>
-    }
 </div>
 
 
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    function confirmDelete(event) {
+<script>function confirmDelete(event) {
         event.preventDefault();
 
         Swal.fire({
