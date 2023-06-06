@@ -36,26 +36,30 @@ namespace MetaX.Pages
             }
 
             // Get the reservations for the logged-in user
-            Reservations = await _context.ReservationsTable
+            var allReservations = await _context.ReservationsTable
                 .Include(r => r.Event)
                 .Where(r => r.UserID == userId)
                 .ToListAsync();
 
+            var uniqueEventIDs = new HashSet<int>(allReservations.Select(r => r.Event.EventID));
+            Reservations = allReservations
+                .Where(r => uniqueEventIDs.Remove(r.Event.EventID))
+                .ToList();
+
             return Page();
         }
+
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                // If the review data is not valid, return the page with the error messages
                 return Page();
             }
 
             var userIdString = _httpContextAccessor.HttpContext.Session.GetString("UserID");
             if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userId))
             {
-                // Handle invalid or missing user ID
                 return BadRequest();
             }
 
@@ -64,7 +68,10 @@ namespace MetaX.Pages
             _context.ReviewsTable.Add(Review);
             await _context.SaveChangesAsync();
 
+            TempData["ReviewSuccess"] = "Yorumunuz başarıyla gönderildi!";
+
             return RedirectToPage("/User/Review");
         }
+
     }
 }
