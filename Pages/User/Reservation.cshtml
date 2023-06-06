@@ -10,14 +10,7 @@
         <div class="container position-relative">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-6 text-center">
-                    <h2>Rezervasyonlarim</h2>
-                    <p>
-                        Odio et unde deleniti. Deserunt numquam
-                        exercitationem. Officiis quo odio sint voluptas
-                        consequatur ut a odio voluptatem. Sit dolorum
-                        debitis veritatis natus dolores. Quasi ratione sint.
-                        Sit quaerat ipsum dolorem.
-                    </p>
+                    <h2>Rezervasyonlarım</h2>
                 </div>
             </div>
         </div>
@@ -25,103 +18,114 @@
     <nav>
         <div class="container">
             <ol>
-                <li><a href="index.html">Home</a></li>
-                <li>Rezervasyonlarim</li>
+                <li><a href="/User">Home</a></li>
+                <li>Rezervasyonlarım</li>
             </ol>
         </div>
     </nav>
 </div>
 <!-- End Breadcrumbs -->
 
-<div class="container position-relative ">
-    <br />
-    <h2>Aktif Rezervasyonlarim</h2>
-</div>
-
-@foreach (var reservations in Model.Reservations)
-{
-    if (reservations.Event.Date.Date >= DateTime.Today)
+<div class="container position-relative my-5">
+    <h2>Aktif Rezervasyonlarım</h2>
+    @foreach (var reservations in Model.Reservations)
     {
-        <div class="container border border-1 rounded-4 my-5">
-            <div class="row">
-                <div class="col-4">
-                    <img src="@reservations.Event.Image" class="rounded-start-4 img-fluid " alt="...">
-                </div>
-                <div class="col-6">
-                    
-                    <a asp-page="/EventDetails" asp-route-id="@reservations.Event.EventID">
-                    <h3 class="card-title mt-4">@reservations.Event.Title</h3>
-                    </a>
-                    <div class="mb-2">
-                        <i class="text-dark">@reservations.Event.Category</i>
+        if (reservations.Event.Date.Date >= DateTime.Today)
+        {
+            <div class="container border border-1 rounded-4 my-5">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="@reservations.Event.Image" class="rounded-start-4 img-fluid " alt="...">
                     </div>
-                    
-                    @{
-                        string eventDate = reservations.Event.Description;
-                        string truncatedEventDate = eventDate.Length > 200 ? eventDate.Substring(0, 200) : eventDate;
-                    }
-                    <p>@truncatedEventDate ...</p>
+                    <div class="col-6">
 
-                    <p style="color:#008374; font-size:30px;">@reservations.Event.Price TL</p>
-                    
-                </div>
-                <div class="col-2 text-dark bg-dark-subtle rounded-end-4 text-center">
-                    <h5 class="mt-5">Etkinlik Tarihi</h5>
-                    <div class="">
-                        <p>@reservations.Event.Date.ToString("dd-MM-yyyy")</p>
-                    </div>
-                    <div class="mt-5 mb-2">
-                        <form method="post" class="d-inline" asp-page-handler="Delete" asp-route-reservationID="@reservations.ReservationID" onsubmit="return confirmDelete(event);">
-                            <button type="submit" class="btn btn-lg btn-danger">İptal et</button>
-                        </form>
-                    </div>
+                        <a asp-page="/EventDetails" asp-route-id="@reservations.Event.EventID">
+                            <h3 class="card-title mt-4">@reservations.Event.Title</h3>
+                        </a>
+                        <div class="mb-2">
+                            <i class="text-dark">@reservations.Event.Category</i>
+                        </div>
 
+                        @{
+                            string eventDate = reservations.Event.Description;
+                            string truncatedEventDate = eventDate.Length > 200 ? eventDate.Substring(0, 200) : eventDate;
+                        }
+                        <p>@truncatedEventDate ...</p>
+
+                        <p style="color:#008374; font-size:30px;">@reservations.Event.Price TL</p>
+
+                    </div>
+                    <div class="col-2 text-dark bg-dark-subtle rounded-end-4 text-center">
+                        <h5 class="mt-5">Etkinlik Tarihi</h5>
+                        <div class="">
+                            <p>@reservations.Event.Date.ToString("dd-MM-yyyy")</p>
+                        </div>
+                        <div class="mt-5 mb-2">
+                            <form method="post" class="d-inline" asp-page-handler="Delete" asp-route-reservationID="@reservations.ReservationID" onsubmit="return confirmDelete(event);">
+                                <button type="submit" class="btn btn-lg btn-danger">İptal et</button>
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     }
-}
-
-
-<div class="container position-relative ">
-    <br />
-    <h2>Geçmiş Rezervasyonlarim</h2>
-</div>
-
-@foreach (var reservations in Model.Reservations)
-{
-    if (reservations.Event.Date.Date < DateTime.Today)
+    @if (Model.Reservations.Count == 0)
     {
-<div class="container border border-1 rounded-4 my-5">
-    <div class="row">
-        <div class="col-3">
-                    <img src="@reservations.Event.Image" class="rounded-start-4 img-fluid " alt="...">
+        <div class="alert alert-danger my-4" role="alert">
+            Herhangi bir reservasyonunuz bulunmamaktadır.
         </div>
-        <div class="col-6">
-                    <h3 class="card-title mt-4">@reservations.Event.Title</h3>
-            <i>categoty</i>
-                    @{
-                        string eventDate = reservations.Event.Description;
-                        string truncatedEventDate = eventDate.Length > 200 ? eventDate.Substring(0, 200) : eventDate;
-                    }
-                    <p>@truncatedEventDate ...</p>
-                    <i>50 $</i>
-        </div>
-        <div class="col-3 text-dark bg-dark-subtle rounded-end-4 text-center">
-            <br />
-            <br />
-            <h5 class="mt-4 ">Etkinlik Tarihi</h5>
-            <div class="">
-                        <p>@reservations.Event.Date.ToString("dd-MM-yyyy")</p>
-            </div>
-
-
-        </div>
-    </div>
+    }
 </div>
 
+
+
+
+<div class="container position-relative mb-5">
+    <h2>Geçmiş Rezervasyonlarım</h2>
+    @foreach (var reservations in Model.Reservations)
+    {
+        if (reservations.Event.Date.Date < DateTime.Today)
+        {
+            <div class="container border border-1 rounded-4 my-5">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="@reservations.Event.Image" class="rounded-start-4 img-fluid " alt="...">
+                    </div>
+                    <div class="col-6">
+                        <h3 class="card-title mt-4">@reservations.Event.Title</h3>
+                        <i>categoty</i>
+                        @{
+                            string eventDate = reservations.Event.Description;
+                            string truncatedEventDate = eventDate.Length > 200 ? eventDate.Substring(0, 200) : eventDate;
+                        }
+                        <p>@truncatedEventDate ...</p>
+                        <i>50 $</i>
+                    </div>
+                    <div class="col-3 text-dark bg-dark-subtle rounded-end-4 text-center">
+                        <br />
+                        <br />
+                        <h5 class="mt-4 ">Etkinlik Tarihi</h5>
+                        <div class="">
+                            <p>@reservations.Event.Date.ToString("dd-MM-yyyy")</p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        }
     }
-}
+    @if (Model.Reservations.Count == 0)
+    {
+        <div class="alert alert-danger my-4" role="alert">
+            Herhangi bir reservasyonunuz bulunmamaktadır.
+        </div>
+    }
+</div>
+
+
 
 
 
