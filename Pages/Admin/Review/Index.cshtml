@@ -13,9 +13,6 @@
 
     <form id="searchForm" method="get">
         <div class="row mt-5">
-            <div class="col-auto">
-                <input type="text" id="eventInput" class="form-control" placeholder="Etkinlik Adı" name="eventName" value="@Request.Query["Title"]">
-            </div>
             <div class="col-auto col-md-2">
                 <select id="ratingInput" class="form-control" name="rating">
                     <option value="">Puan Seçiniz</option>
@@ -95,7 +92,6 @@
         }
 
         function clearInput() {
-            document.getElementById('eventInput').value = '';
             document.getElementById('ratingInput').value = '';
             document.getElementById('searchForm').submit();
         }</script>

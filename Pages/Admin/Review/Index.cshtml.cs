@@ -19,16 +19,22 @@ namespace MetaX.Pages.Admin.Review
             _db = db;
         }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string eventName, int? rating)
         {
-            Reviews = await GetLatestReviewDetails();
+            Reviews = await GetLatestReviewDetails(eventName, rating);
         }
 
-        public async Task<List<ReviewDetails>> GetLatestReviewDetails()
+        public async Task<List<ReviewDetails>> GetLatestReviewDetails(string eventName, int? rating)
         {
-            var latestReviews = await _db.ReviewsTable
+            var reviewsQuery = _db.ReviewsTable.AsQueryable();
+
+            if (rating.HasValue)
+            {
+                reviewsQuery = reviewsQuery.Where(r => r.Rating == rating.Value);
+            }
+
+            var latestReviews = await reviewsQuery
                 .OrderByDescending(r => r.ReviewID)
-                .Take(3)
                 .ToListAsync();
 
             var reviewDetails = new List<ReviewDetails>();
@@ -36,13 +42,13 @@ namespace MetaX.Pages.Admin.Review
             foreach (var review in latestReviews)
             {
                 var user = await _db.UsersTable.FindAsync(review.UserID);
-                var eventName = (await _db.EventsTable.FindAsync(review.EventID)).Title;
+                var eventtName = (await _db.EventsTable.FindAsync(review.EventID)).Title;
 
                 var reviewDetail = new ReviewDetails
                 {
                     ReviewID = review.ReviewID,
                     UserName = $"{user.Name} {user.Surname}",
-                    EventName = eventName,
+                    EventName = eventtName,
                     Rating = review.Rating,
                     Comment = review.Comment
                 };
