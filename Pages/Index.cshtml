@@ -368,7 +368,7 @@
                 </div>
 
                 <div class="col-lg-8">
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <form action="" method="post" role="form" class="php-email-form" id="contactForm">
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Ad Soyad" required>
@@ -385,7 +385,6 @@
                         </div>
                         <div class="my-3">
                             <div class="loading">Yükleniyor</div>
-                            <div class="error-message"></div>
                             <div class="sent-message">Mesajınız gönderildi. Teşekkür ederiz!</div>
                         </div>
                         <div class="text-center"><button type="submit">Mesajı Gönder</button></div>
@@ -398,3 +397,24 @@
     </section><!-- End Contact Section -->
 
 </main><!-- End #main -->
+
+
+
+<script>// Handle form submission
+    document.getElementById("contactForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Show the loading message
+        var loadingMessage = document.querySelector("#contactForm .loading");
+        loadingMessage.style.display = "block";
+
+        // Simulate a delay to show the feedback message
+        setTimeout(function () {
+            // Hide the loading message
+            loadingMessage.style.display = "none";
+
+            // Show the success message
+            var successMessage = document.querySelector("#contactForm .sent-message");
+            successMessage.style.display = "block";
+        }, 2000);
+    });</script>
