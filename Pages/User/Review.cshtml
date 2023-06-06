@@ -1,0 +1,81 @@
+﻿@page
+@model MetaX.Pages.ReviewModel
+@{
+}
+
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+    <div class="page-header d-flex align-items-center"
+         style="background-image: url('')">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2>Değerlendirmelerim</h2>
+                    <p>
+                        Odio et unde deleniti. Deserunt numquam
+                        exercitationem. Officiis quo odio sint voluptas
+                        consequatur ut a odio voluptatem. Sit dolorum
+                        debitis veritatis natus dolores. Quasi ratione sint.
+                        Sit quaerat ipsum dolorem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="container">
+            <ol>
+                <li><a href="index.html">Home</a></li>
+                <li>Değerlendirmeler</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+<!-- End Breadcrumbs -->
+
+<div class="container">
+    <h3>Yorum Yap</h3>
+    @if (Model.Reservations.Count == 0)
+    {
+        <p>No reservations found. You cannot make a comment.</p>
+    }
+    else
+    {
+        <form method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="event">Etkinlik</label>
+                <select class="form-control" id="event" name="EventID">
+                    <option value="">Select event</option>
+                    @foreach (var reservation in Model.Reservations)
+                    {
+                        <option value="@reservation.Event.EventID">@reservation.Event.Title</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rating">Yıldızlar</label>
+                <select class="form-control" id="rating" name="Rating">
+                    <option value="1">☆</option>
+                    <option value="2">☆☆</option>
+                    <option value="3">☆☆☆</option>
+                    <option value="4">☆☆☆☆</option>
+                    <option value="5">☆☆☆☆☆</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="comment">Yorum</label>
+                <textarea class="form-control" id="comment" name="Comment" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Gönder</button>
+        </form>
+    }
+</div>
+
+<script>function validateForm() {
+        var eventDropdown = document.getElementById("event");
+        if (eventDropdown.value === "") {
+            alert("Please select an event.");
+            return false;
+        }
+        return true;
+    }</script>
