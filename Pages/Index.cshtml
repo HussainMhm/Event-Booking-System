@@ -287,7 +287,10 @@
                             <div class="testimonial-wrap">
                                 <div class="testimonial-item">
                                     <div class="d-flex align-items-center">
-                                        <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img flex-shrink-0" alt="">
+                                        @{
+                                            string imagePath = $"https://randomuser.me/api/portraits/men/{review.UserID}.jpg";
+                                        }
+                                        <img src="@imagePath" class="testimonial-img flex-shrink-0" alt="">
                                         <div>
                                             <h3>@review.UserName</h3>
                                             <h4>@review.EventName</h4>
@@ -385,6 +388,7 @@
                         </div>
                         <div class="my-3">
                             <div class="loading">Yükleniyor</div>
+                       
                             <div class="sent-message">Mesajınız gönderildi. Teşekkür ederiz!</div>
                         </div>
                         <div class="text-center"><button type="submit">Mesajı Gönder</button></div>
@@ -398,9 +402,8 @@
 
 </main><!-- End #main -->
 
-
-
-<script>// Handle form submission
+<script>
+    // Handle form submission
     document.getElementById("contactForm").addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent default form submission
 
