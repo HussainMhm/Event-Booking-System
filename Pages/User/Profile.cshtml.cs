@@ -1,5 +1,6 @@
 ﻿using MetaX.Data;
 using MetaX.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -7,40 +8,30 @@ using System.Threading.Tasks;
 
 namespace MetaX.Pages.User
 {
+    [Authorize]
     public class ProfileModel : PageModel
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly MetaxDbContext _context;
 
-        public ProfileModel(IHttpContextAccessor httpContextAccessor, MetaxDbContext context)
+        public ProfileModel(MetaxDbContext context)
         {
-            _httpContextAccessor = httpContextAccessor;
             _context = context;
         }
 
         [BindProperty]
         public Model.User User { get; set; }
 
+        [Authorize]
         public async Task<IActionResult> OnGetAsync(int id)
         {
             User = await _context.UsersTable.FindAsync(id);
 
-            if (User != null)
-            {
-                User = new Model.User
-                {
-                    UserID = User.UserID,
-                    Name = User.Name,
-                    Surname = User.Surname,
-                    Email = User.Email,
-                    PhoneNumber = User.PhoneNumber,
-                    Password = User.Password
-                };
+            //if (User != null)
+            //{
                 return Page();
-            }
+            //}
 
-
-            return RedirectToPage("/Login"); // Kullanıcı giriş yapmadıysa giriş sayfasına yönlendirilir.
+            //return RedirectToPage("/Login"); // Redirect to login page if user is not found
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -53,9 +44,7 @@ namespace MetaX.Pages.User
             var user = await _context.UsersTable.FindAsync(User.UserID);
 
             if (user != null)
-
             {
-                user.UserID = User.UserID;
                 user.Name = User.Name;
                 user.Surname = User.Surname;
                 user.Email = User.Email;
@@ -64,10 +53,12 @@ namespace MetaX.Pages.User
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToPage("/User/Account");
+                TempData["UpdateSuccess"] = true; // Store a flag in TempData
+
+                return RedirectToPage("/User/Index");
             }
 
-            return RedirectToPage("/Login");
+            return Page(); // Return the page itself without redirection
         }
     }
 }
