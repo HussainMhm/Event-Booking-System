@@ -44,53 +44,55 @@
     </div>
     <!-- End Breadcrumbs -->
 
-    <div class="container" data-aos="fade-up">
+    <div class="container">
         
 
     <!-- ======= Blog Section ======= -->
-<section id="blog" class="blog">
-        <div class="row gy-4 posts-list">
-            
-            @foreach (var item in Model.Events)
+        <section id="blog" class="blog">
+            @if (Model.Events.Count == 0)
             {
-                <div class="col-xl-4 col-md-6">
-                    <article>
-                        <div class="post-img">
-                            <img
-                                src="@item.Image"
-                                alt="@item.Title"
-                                class="img-fluid"
-                            />
-                        </div>
-
-                        <p class="post-category">@item.Category</p>
-
-                        <h2 class="title">
-                            <a asp-page="EventDetails" asp-route-id="@item.EventID">@item.Title</a>
-                        </h2>
-
-                        <div class="d-flex align-items-center border-bottom pb-4">
-                            <img
-                                src="assets/img/blog/blog-author.jpg"
-                                alt="@item.Title"
-                                class="img-fluid post-author-img flex-shrink-0"
-                            />
-                            <div class="post-meta">
-                                <p class="post-author-list">@item.Location</p>
-                                <p class="post-date">
-                                    <time datetime="@item.Date.ToString("yyyy-MM-dd")">@item.Date.ToString("dd-MM-yyyy")</time>
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Add footer here -->
-                        <div class="card-footer mt-3">
-                            <h6 class="ticket-price">Ticket Price: ₺@item.Price.ToString("F2")</h6>
-                        </div>
-                        
-                    </article>
+                <div class="alert alert-danger my-4" role="alert">
+                    Bu kategoride şuan aktif bir etkinlik bulunmamaktadır.
                 </div>
             }
+            <div class="row gy-4 posts-list">
+
+                @foreach (var item in Model.Events)
+                {
+                    <div class="col-xl-4 col-md-6">
+                        <article>
+                            <div class="post-img">
+                                <img src="@item.Image"
+                                     alt="@item.Title"
+                                     class="img-fluid" />
+                            </div>
+
+                            <p class="post-category">@item.Category</p>
+
+                            <h2 class="title">
+                                <a asp-page="EventDetails" asp-route-id="@item.EventID">@item.Title</a>
+                            </h2>
+
+                            <div class="d-flex align-items-center border-bottom pb-4">
+                                <img src="assets/img/blog/blog-author.jpg"
+                                     alt="@item.Title"
+                                     class="img-fluid post-author-img flex-shrink-0" />
+                                <div class="post-meta">
+                                    <p class="post-author-list">@item.Location</p>
+                                    <p class="post-date">
+                                        <time datetime="@item.Date.ToString("yyyy-MM-dd")">@item.Date.ToString("dd-MM-yyyy")</time>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Add footer here -->
+                            <div class="card-footer mt-3">
+                                <h6 class="ticket-price">Ticket Price: ₺@item.Price.ToString("F2")</h6>
+                            </div>
+
+                        </article>
+                    </div>
+                }
                 <!-- End post list item -->
 
             </div>
@@ -101,7 +103,7 @@
                 <ul class="justify-content-center">
                     @for (var i = 1; i <= Model.TotalPages; i++)
                     {
-                        var currentPage = string.IsNullOrEmpty(HttpContext.Request.Query["pageNumber"]) 
+                        var currentPage = string.IsNullOrEmpty(HttpContext.Request.Query["pageNumber"])
                                             ? 1 : Convert.ToInt32(HttpContext.Request.Query["pageNumber"]);
                         if (i == currentPage)
                         {
@@ -117,7 +119,7 @@
             <!-- End blog pagination -->
 
 
-        </div>
+</div>
     </section>
     <!-- End Blog Section -->
 </main>
