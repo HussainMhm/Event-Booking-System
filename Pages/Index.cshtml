@@ -2,422 +2,480 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    // Declare and initialize the flag variable
+    bool renderPage = false;
 }
 
-<!-- ======= Hero Section ======= -->
-<section id="hero" class="hero">
-    <div class="container position-relative">
-        <div class="row gy-5" data-aos="fade-in">
-            <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-                <h2>MetaX Events'e Hoş Geldiniz!</h2>
-                <p>Etkinlik deneyiminizi dönüştürmek için buradayız. MetaX Events, heyecan verici etkinliklerin kapılarını size açıyor. İster bir konser, ister bir konferans, isterse bir sanat sergisi olsun, etkinliklerin dünyasında sizinle buluşmak için sabırsızlanıyoruz.</p>
-                <div class="d-flex justify-content-center justify-content-lg-start">
-                    <a href="#about" class="btn-get-started">Hadi Başlayalım!</a>
-                </div>
-            </div>
-            <div class="col-lg-6 order-1 order-lg-2">
-                <img src="assets/img/hero-img.svg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
-            </div>
-        </div>
-    </div>
-
-    <div class="icon-boxes position-relative">
+@if (renderPage)
+{
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="hero">
         <div class="container position-relative">
-            <div class="row gy-4 mt-5">
-
-                @foreach (var kategoriId in Model.PopulerKategoriIds)
-                {
-                    <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="icon-box">
-                            <div class="icon"><i class="bi bi-easel"></i></div>
-                            <h4 class="title"><a asp-page="Events" asp-route-category="@kategoriId" class="stretched-link">@kategoriId</a></h4>
-                        </div>
-                    </div>
-
-                    <!--End Icon Box -->
-
-                }
-            </div>
-        </div>
-    </div>
-
-
- 
-</section>
-<!-- End Hero Section -->
-
-<main id="main">
-
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-header">
-                <h2>Hakkımızda</h2>
-                <p>MetaX Events, etkinlik dünyasında unutulmaz deneyimler sunan lider bir rezervasyon platformudur.</p>
-            </div>
-
-            <div class="row gy-4">
-                <div class="col-lg-6 text-end">
-                    <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="" style="max-width: 500px; ">
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="content ps-0 ps-lg-5 pe-2">
-                        <p>
-                            MetaX Events, etkinlik dünyasında öncü bir rezervasyon platformudur. Amacımız, insanların heyecan verici etkinliklerle bir araya gelmesini sağlayarak unutulmaz deneyimler yaratmaktır. Geniş bir etkinlik portföyü sunarak müzik konserlerinden sanat sergilerine, spor etkinliklerinden konferanslara kadar herkesin ilgisini çekebilecek çeşitli etkinlikleri bir araya getiriyoruz.
-                        </p>
-                        <p>
-                            Müşteri memnuniyetini en üst düzeyde tutmak için kullanıcı dostu bir arayüz ve güvenli bir rezervasyon deneyimi sunuyoruz. Ekip olarak, etkinliklere olan tutkumuzu paylaşıyor ve her bir etkinlik deneyiminin benzersiz olduğuna inanıyoruz. MetaX Events'e katılın, sınırsız etkinlik seçenekleriyle dolu olan büyülü bir dünyaya adım atın.
-                        </p>
+            <div class="row gy-5" data-aos="fade-in">
+                <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
+                    <h2>MetaX Events'e Hoş Geldiniz!</h2>
+                    <p>Etkinlik deneyiminizi dönüştürmek için buradayız. MetaX Events, heyecan verici etkinliklerin kapılarını size açıyor. İster bir konser, ister bir konferans, isterse bir sanat sergisi olsun, etkinliklerin dünyasında sizinle buluşmak için sabırsızlanıyoruz.</p>
+                    <div class="d-flex justify-content-center justify-content-lg-start">
+                        <a href="#about" class="btn-get-started">Hadi Başlayalım!</a>
                     </div>
                 </div>
-            </div>
-
-        </div>
-    </section><!-- End About Us Section -->
-    <!-- ======= Our Services Section ======= -->
-    <section id="services" class="services sections-bg">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-header">
-                <h2>Hizmetlerimiz</h2>
-                <p>MetaX Events olarak, etkinlik deneyiminizi dönüştürecek çeşitli hizmetler sunuyoruz.</p>
-            </div>
-
-            <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-item  position-relative">
-                        <div class="icon">
-                            <i class="bi bi-activity"></i>
-                        </div>
-                        <h3>Rezervasyon ve Bilet Satışı</h3>
-                        <p>Kullanıcıların kolaylıkla etkinlik rezervasyonu yapmasını ve biletlerini güvenli bir şekilde satın almalarını sağlar. Geniş etkinlik portföyünden seçim yapabilir ve unutulmaz deneyimler yaşayabilirsiniz.</p>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-item position-relative">
-                        <div class="icon">
-                            <i class="bi bi-broadcast"></i>
-                        </div>
-                        <h3>Planlama ve Organizasyon</h3>
-                        <p>Profesyonel etkinlik planlama ve organizasyon hizmetleriyle, MetaX Events size etkinliklerinizi sorunsuz bir şekilde planlama ve yönetme imkanı sunar. Mekan seçimi, sponsorluk bulma, tanıtım ve pazarlama gibi konularda destek sağlarız.</p>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-item position-relative">
-                        <div class="icon">
-                            <i class="bi bi-easel"></i>
-                        </div>
-                        <h3>Pazarlama ve Tanıtım</h3>
-                        <p>Etkinliklerinizi hedef kitleye ulaştırmak için etkili pazarlama ve tanıtım stratejileri sunar. Sosyal medya yönetimi, dijital pazarlama, basın ilişkileri gibi alanlarda uzman ekibimizle etkinliklerinizi daha geniş bir kitleye duyurmanızı sağlarız.</p>
-                    </div>
-                </div><!-- End Service Item -->
-
-            </div>
-
-        </div>
-    </section><!-- End Our Services Section -->
-    <!-- ======= Recent Blog Posts Section ======= -->
-    <section id="recent-posts" class="recent-posts">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-header">
-                <h2>Yaklaşan Etkinlikler</h2>
-                <p>Keşfedin ve katılın! Yaklaşan etkinliklerle dolu bir dünyaya adım atın.</p>
-            </div>
-
-            <div class="row gy-4">
-
-                @foreach (var _event in Model.EarlyEvents)
-                {
-                    <div class="col-xl-4 col-md-6">
-                        <article>
-
-                            <div class="post-img">
-                                <img src="@_event.Image" alt="" class="img-fluid">
-                            </div>
-
-                            <p class="post-category">@_event.Category</p>
-
-                            <h2 class="title">
-                                <a asp-page="EventDetails" asp-route-id="@_event.EventID">@_event.Title</a>
-                            </h2>
-
-                            <div class="d-flex align-items-center">
-                                <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                                <div class="post-meta">
-                                    <p class="post-author">@_event.Location</p>
-                                    <p class="post-date">
-                                        <time>@_event.Date.ToString("dd-MM-yyyy")</time>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </article>
-                    </div><!-- End post list item -->
-                }
-
-
-            </div><!-- End recent posts list -->
-
-        </div>
-    </section><!-- End Recent Blog Posts Section -->
-    <!-- ======= Our Team Section ======= -->
-    <section id="team" class="team sections-bg">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-header">
-                <h2>Ekibimiz</h2>
-                <p>Profesyonel ve tutkulu bir ekip olarak, MetaX Events'i başarıyla yönlendiriyoruz.</p>
-            </div>
-
-            <div class="row gy-4 justify-content-center">
-
-                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-                    <div class="member">
-                        <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                        <h4>Hussain Abdullatif</h4>
-                        <span>Chief Operation Officer</span>
-                        <div class="social">
-                            <a href=""><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div><!-- End Team Member -->
-
-                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
-                    <div class="member">
-                        <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                        <h4>Emirhan Tulimat</h4>
-                        <span>Chief Technology Officer</span>
-                        <div class="social">
-                            <a href=""><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div><!-- End Team Member -->
-
-            </div>
-
-        </div>
-    </section><!-- End Our Team Section -->
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq">
-        <div class="container" data-aos="fade-up">
-
-            <div class="row gy-4">
-
-                <div class="col-lg-4">
-                    <div class="content px-xl-5">
-                        <h3>Sıkça Sorulan <strong>Sorular</strong></h3>
-                        <p>
-                            En yaygın sorularınızın yanıtlarını bulabileceğiniz bir kaynaktır. İhtiyaç duyduğunuz bilgilere hızlıca erişmek için buradayız!
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-8">
-
-                    <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
-
-                        <div class="accordion-item">
-                            <h3 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                                    <span class="num">1.</span>
-                                    Etkinlik biletlerini nasıl satın alabilirim?
-                                </button>
-                            </h3>
-                            <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                                <div class="accordion-body">
-                                    MetaX Events platformunda etkinlik biletlerini kolaylıkla satın alabilirsiniz. İlgilendiğiniz etkinliği seçin, istediğiniz bilet tipini ve sayısını belirleyin, ardından güvenli ödeme yöntemlerimizle ödemeyi tamamlayın. Elektronik biletiniz anında size gönderilecektir.
-                                </div>
-                            </div>
-                        </div><!-- # Faq item-->
-
-                        <div class="accordion-item">
-                            <h3 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                                    <span class="num">2.</span>
-                                    Etkinlik iptalinde bilet iadesi yapılıyor mu?
-                                </button>
-                            </h3>
-                            <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                                <div class="accordion-body">
-                                    Etkinlik iptallerinde bilet iadesi politikaları etkinliğin kendisine bağlıdır. Genellikle etkinlik düzenleyicisinin belirlediği kurallar çerçevesinde bilet iade veya değişiklik işlemleri gerçekleştirilir. İade politikalarıyla ilgili ayrıntılı bilgiler etkinlik sayfasında ve bilet satın alırken gözden geçirilebilir.
-                                </div>
-                            </div>
-                        </div><!-- # Faq item-->
-
-                        <div class="accordion-item">
-                            <h3 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                                    <span class="num">3.</span>
-                                    Etkinliklere nasıl katılabilirim?
-                                </button>
-                            </h3>
-                            <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                                <div class="accordion-body">
-                                    MetaX Events üzerinden etkinliklere katılmak oldukça kolaydır. İlgilendiğiniz etkinliği seçin, uygun biletleri satın alın ve biletinizin yanınızda olduğundan emin olun. Etkinlik gününde belirtilen mekan ve saatte orada olmanız yeterlidir. Etkinliğe katılmadan önce ilgili etkinlik sayfasından gerekli bilgileri ve yönergeleri kontrol etmeniz önemlidir.
-                                </div>
-                            </div>
-                        </div><!-- # Faq item-->
-
-                    </div>
-
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <img src="assets/img/hero-img.svg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
                 </div>
             </div>
-
         </div>
-    </section><!-- End Frequently Asked Questions Section -->
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials sections-bg">
-        <div class="container" data-aos="fade-up">
-            <div class="section-header">
-                <h2>Müşteri Yorumları</h2>
-                <p>MetaX Events'in geniş etkinlik seçenekleri, kolay rezervasyon süreci ve güvenli ödeme yöntemleri hakkındaki memnuniyetlerini sizlerle paylaşıyoruz. Platformumuz hakkında daha fazla bilgi edinin!</p>
-            </div>
 
-            <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
-                <div class="swiper-wrapper">
-                    @foreach (var review in Model.Reviews)
+        <div class="icon-boxes position-relative">
+            <div class="container position-relative">
+                <div class="row gy-4 mt-5">
+
+                    @foreach (var kategoriId in Model.PopulerKategoriIds)
                     {
-                        <div class="swiper-slide">
-                            <div class="testimonial-wrap">
-                                <div class="testimonial-item">
-                                    <div class="d-flex align-items-center">
-                                        @{
-                                            string imagePath = $"https://randomuser.me/api/portraits/men/{review.UserID}.jpg";
-                                        }
-                                        <img src="@imagePath" class="testimonial-img flex-shrink-0" alt="">
-                                        <div>
-                                            <h3>@review.UserName</h3>
-                                            <h4>@review.EventName</h4>
-                                            <div class="stars">
-                                                @for (int i = 0; i < review.Rating; i++)
-                                                {
-                                                    <i class="bi bi-star-fill"></i>
-                                                }
-                                                @for (int i = review.Rating; i < 5; i++)
-                                                {
-                                                    <i class="bi bi-star"></i>
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p>
-                                        <i class="bi bi-quote quote-icon-left"></i>
-                                        @review.Comment
-                                        <i class="bi bi-quote quote-icon-right"></i>
-                                    </p>
-                                </div>
+                        <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon-box">
+                                <div class="icon"><i class="bi bi-easel"></i></div>
+                                <h4 class="title"><a asp-page="Events" asp-route-category="@kategoriId" class="stretched-link">@kategoriId</a></h4>
                             </div>
                         </div>
+
+                        <!--End Icon Box -->
+
                     }
                 </div>
-                <div class="swiper-pagination"></div>
             </div>
         </div>
+
+
+
     </section>
-    <!-- End Testimonials Section -->
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-        <div class="container" data-aos="fade-up">
+    <!-- End Hero Section -->
 
-            <div class="section-header">
-                <h2>İletişim</h2>
-                <p>İhtiyaçlarınız, sorularınız veya geri bildirimleriniz için bize ulaşın. Profesyonel ve dostane ekibimiz, size yardımcı olmaktan mutluluk duyacaktır. Bizimle iletişime geçin ve etkinlik deneyiminizi daha da unutulmaz hale getirelim!</p>
-            </div>
+    <main id="main">
 
-            <div class="row gx-lg-0 gy-4">
+        <!-- ======= About Us Section ======= -->
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up">
 
-                <div class="col-lg-4">
+                <div class="section-header">
+                    <h2>Hakkımızda</h2>
+                    <p>MetaX Events, etkinlik dünyasında unutulmaz deneyimler sunan lider bir rezervasyon platformudur.</p>
+                </div>
 
-                    <div class="info-container d-flex flex-column align-items-center justify-content-center">
-                        <div class="info-item d-flex">
-                            <i class="bi bi-geo-alt flex-shrink-0"></i>
-                            <div>
-                                <h4>Adres:</h4>
-                                <p>Yunus Emre Sokak, İstanbul, Türkiye 34022</p>
-                            </div>
-                        </div><!-- End Info Item -->
-
-                        <div class="info-item d-flex">
-                            <i class="bi bi-envelope flex-shrink-0"></i>
-                            <div>
-                                <h4>Email:</h4>
-                                <p>info@metax.com</p>
-                            </div>
-                        </div><!-- End Info Item -->
-
-                        <div class="info-item d-flex">
-                            <i class="bi bi-phone flex-shrink-0"></i>
-                            <div>
-                                <h4>Telefon:</h4>
-                                <p>+90 558 955 4885</p>
-                            </div>
-                        </div><!-- End Info Item -->
-
-                        <div class="info-item d-flex">
-                            <i class="bi bi-clock flex-shrink-0"></i>
-                            <div>
-                                <h4>Çalışma Saatleri:</h4>
-                                <p>Pazartesi-Cumartesi: 11:00 - 23:00</p>
-                            </div>
-                        </div><!-- End Info Item -->
+                <div class="row gy-4">
+                    <div class="col-lg-6 text-end">
+                        <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="" style="max-width: 500px; ">
                     </div>
+
+                    <div class="col-lg-6">
+                        <div class="content ps-0 ps-lg-5 pe-2">
+                            <p>
+                                MetaX Events, etkinlik dünyasında öncü bir rezervasyon platformudur. Amacımız, insanların heyecan verici etkinliklerle bir araya gelmesini sağlayarak unutulmaz deneyimler yaratmaktır. Geniş bir etkinlik portföyü sunarak müzik konserlerinden sanat sergilerine, spor etkinliklerinden konferanslara kadar herkesin ilgisini çekebilecek çeşitli etkinlikleri bir araya getiriyoruz.
+                            </p>
+                            <p>
+                                Müşteri memnuniyetini en üst düzeyde tutmak için kullanıcı dostu bir arayüz ve güvenli bir rezervasyon deneyimi sunuyoruz. Ekip olarak, etkinliklere olan tutkumuzu paylaşıyor ve her bir etkinlik deneyiminin benzersiz olduğuna inanıyoruz. MetaX Events'e katılın, sınırsız etkinlik seçenekleriyle dolu olan büyülü bir dünyaya adım atın.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End About Us Section -->
+        <!-- ======= Our Services Section ======= -->
+        <section id="services" class="services sections-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>Hizmetlerimiz</h2>
+                    <p>MetaX Events olarak, etkinlik deneyiminizi dönüştürecek çeşitli hizmetler sunuyoruz.</p>
+                </div>
+
+                <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-item  position-relative">
+                            <div class="icon">
+                                <i class="bi bi-activity"></i>
+                            </div>
+                            <h3>Rezervasyon ve Bilet Satışı</h3>
+                            <p>Kullanıcıların kolaylıkla etkinlik rezervasyonu yapmasını ve biletlerini güvenli bir şekilde satın almalarını sağlar. Geniş etkinlik portföyünden seçim yapabilir ve unutulmaz deneyimler yaşayabilirsiniz.</p>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="bi bi-broadcast"></i>
+                            </div>
+                            <h3>Planlama ve Organizasyon</h3>
+                            <p>Profesyonel etkinlik planlama ve organizasyon hizmetleriyle, MetaX Events size etkinliklerinizi sorunsuz bir şekilde planlama ve yönetme imkanı sunar. Mekan seçimi, sponsorluk bulma, tanıtım ve pazarlama gibi konularda destek sağlarız.</p>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="bi bi-easel"></i>
+                            </div>
+                            <h3>Pazarlama ve Tanıtım</h3>
+                            <p>Etkinliklerinizi hedef kitleye ulaştırmak için etkili pazarlama ve tanıtım stratejileri sunar. Sosyal medya yönetimi, dijital pazarlama, basın ilişkileri gibi alanlarda uzman ekibimizle etkinliklerinizi daha geniş bir kitleye duyurmanızı sağlarız.</p>
+                        </div>
+                    </div><!-- End Service Item -->
 
                 </div>
 
-                <div class="col-lg-8">
-                    <form action="" method="post" role="form" class="php-email-form" id="contactForm">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Ad Soyad" required>
-                            </div>
-                            <div class="col-md-6 form-group mt-3 mt-md-0">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Mail" required>
-                            </div>
-                        </div>
-                        <div class="form-group mt-3">
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Konu" required>
-                        </div>
-                        <div class="form-group mt-3">
-                            <textarea class="form-control" name="message" rows="7" placeholder="Mesaj" required></textarea>
-                        </div>
-                        <div class="my-3">
-                            <div class="loading">Yükleniyor</div>
-                       
-                            <div class="sent-message">Mesajınız gönderildi. Teşekkür ederiz!</div>
-                        </div>
-                        <div class="text-center"><button type="submit">Mesajı Gönder</button></div>
-                    </form>
-                </div><!-- End Contact Form -->
+            </div>
+        </section><!-- End Our Services Section -->
+        <!-- ======= Recent Blog Posts Section ======= -->
+        <section id="recent-posts" class="recent-posts">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>Yaklaşan Etkinlikler</h2>
+                    <p>Keşfedin ve katılın! Yaklaşan etkinliklerle dolu bir dünyaya adım atın.</p>
+                </div>
+
+                <div class="row gy-4">
+
+                    @foreach (var _event in Model.EarlyEvents)
+                    {
+                        <div class="col-xl-4 col-md-6">
+                            <article>
+
+                                <div class="post-img">
+                                    <img src="@_event.Image" alt="" class="img-fluid">
+                                </div>
+
+                                <p class="post-category">@_event.Category</p>
+
+                                <h2 class="title">
+                                    <a asp-page="EventDetails" asp-route-id="@_event.EventID">@_event.Title</a>
+                                </h2>
+
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+                                    <div class="post-meta">
+                                        <p class="post-author">@_event.Location</p>
+                                        <p class="post-date">
+                                            <time>@_event.Date.ToString("dd-MM-yyyy")</time>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </article>
+                        </div><!-- End post list item -->
+                    }
+
+
+                </div><!-- End recent posts list -->
 
             </div>
+        </section><!-- End Recent Blog Posts Section -->
+        <!-- ======= Our Team Section ======= -->
+        <section id="team" class="team sections-bg">
+            <div class="container" data-aos="fade-up">
 
+                <div class="section-header">
+                    <h2>Ekibimiz</h2>
+                    <p>Profesyonel ve tutkulu bir ekip olarak, MetaX Events'i başarıyla yönlendiriyoruz.</p>
+                </div>
+
+                <div class="row gy-4 justify-content-center">
+
+                    <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+                        <div class="member">
+                            <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                            <h4>Hussain Abdullatif</h4>
+                            <span>Chief Operation Officer</span>
+                            <div class="social">
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- End Team Member -->
+
+                    <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+                        <div class="member">
+                            <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                            <h4>Emirhan Tulimat</h4>
+                            <span>Chief Technology Officer</span>
+                            <div class="social">
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- End Team Member -->
+
+                </div>
+
+            </div>
+        </section><!-- End Our Team Section -->
+        <!-- ======= Frequently Asked Questions Section ======= -->
+        <section id="faq" class="faq">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-4">
+                        <div class="content px-xl-5">
+                            <h3>Sıkça Sorulan <strong>Sorular</strong></h3>
+                            <p>
+                                En yaygın sorularınızın yanıtlarını bulabileceğiniz bir kaynaktır. İhtiyaç duyduğunuz bilgilere hızlıca erişmek için buradayız!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+
+                        <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                                        <span class="num">1.</span>
+                                        Etkinlik biletlerini nasıl satın alabilirim?
+                                    </button>
+                                </h3>
+                                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                                    <div class="accordion-body">
+                                        MetaX Events platformunda etkinlik biletlerini kolaylıkla satın alabilirsiniz. İlgilendiğiniz etkinliği seçin, istediğiniz bilet tipini ve sayısını belirleyin, ardından güvenli ödeme yöntemlerimizle ödemeyi tamamlayın. Elektronik biletiniz anında size gönderilecektir.
+                                    </div>
+                                </div>
+                            </div><!-- # Faq item-->
+
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                                        <span class="num">2.</span>
+                                        Etkinlik iptalinde bilet iadesi yapılıyor mu?
+                                    </button>
+                                </h3>
+                                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                                    <div class="accordion-body">
+                                        Etkinlik iptallerinde bilet iadesi politikaları etkinliğin kendisine bağlıdır. Genellikle etkinlik düzenleyicisinin belirlediği kurallar çerçevesinde bilet iade veya değişiklik işlemleri gerçekleştirilir. İade politikalarıyla ilgili ayrıntılı bilgiler etkinlik sayfasında ve bilet satın alırken gözden geçirilebilir.
+                                    </div>
+                                </div>
+                            </div><!-- # Faq item-->
+
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                                        <span class="num">3.</span>
+                                        Etkinliklere nasıl katılabilirim?
+                                    </button>
+                                </h3>
+                                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                                    <div class="accordion-body">
+                                        MetaX Events üzerinden etkinliklere katılmak oldukça kolaydır. İlgilendiğiniz etkinliği seçin, uygun biletleri satın alın ve biletinizin yanınızda olduğundan emin olun. Etkinlik gününde belirtilen mekan ve saatte orada olmanız yeterlidir. Etkinliğe katılmadan önce ilgili etkinlik sayfasından gerekli bilgileri ve yönergeleri kontrol etmeniz önemlidir.
+                                    </div>
+                                </div>
+                            </div><!-- # Faq item-->
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Frequently Asked Questions Section -->
+        <!-- ======= Testimonials Section ======= -->
+        <section id="testimonials" class="testimonials sections-bg">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Müşteri Yorumları</h2>
+                    <p>MetaX Events'in geniş etkinlik seçenekleri, kolay rezervasyon süreci ve güvenli ödeme yöntemleri hakkındaki memnuniyetlerini sizlerle paylaşıyoruz. Platformumuz hakkında daha fazla bilgi edinin!</p>
+                </div>
+
+                <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
+                    <div class="swiper-wrapper">
+                        @foreach (var review in Model.Reviews)
+                        {
+                            <div class="swiper-slide">
+                                <div class="testimonial-wrap">
+                                    <div class="testimonial-item">
+                                        <div class="d-flex align-items-center">
+                                            @{
+                                                string imagePath = $"https://randomuser.me/api/portraits/men/{review.UserID}.jpg";
+                                            }
+                                            <img src="@imagePath" class="testimonial-img flex-shrink-0" alt="">
+                                            <div>
+                                                <h3>@review.UserName</h3>
+                                                <h4>@review.EventName</h4>
+                                                <div class="stars">
+                                                    @for (int i = 0; i < review.Rating; i++)
+                                                    {
+                                                        <i class="bi bi-star-fill"></i>
+                                                    }
+                                                    @for (int i = review.Rating; i < 5; i++)
+                                                    {
+                                                        <i class="bi bi-star"></i>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            <i class="bi bi-quote quote-icon-left"></i>
+                                            @review.Comment
+                                            <i class="bi bi-quote quote-icon-right"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+        <!-- End Testimonials Section -->
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>İletişim</h2>
+                    <p>İhtiyaçlarınız, sorularınız veya geri bildirimleriniz için bize ulaşın. Profesyonel ve dostane ekibimiz, size yardımcı olmaktan mutluluk duyacaktır. Bizimle iletişime geçin ve etkinlik deneyiminizi daha da unutulmaz hale getirelim!</p>
+                </div>
+
+                <div class="row gx-lg-0 gy-4">
+
+                    <div class="col-lg-4">
+
+                        <div class="info-container d-flex flex-column align-items-center justify-content-center">
+                            <div class="info-item d-flex">
+                                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                                <div>
+                                    <h4>Adres:</h4>
+                                    <p>Yunus Emre Sokak, İstanbul, Türkiye 34022</p>
+                                </div>
+                            </div><!-- End Info Item -->
+
+                            <div class="info-item d-flex">
+                                <i class="bi bi-envelope flex-shrink-0"></i>
+                                <div>
+                                    <h4>Email:</h4>
+                                    <p>info@metax.com</p>
+                                </div>
+                            </div><!-- End Info Item -->
+
+                            <div class="info-item d-flex">
+                                <i class="bi bi-phone flex-shrink-0"></i>
+                                <div>
+                                    <h4>Telefon:</h4>
+                                    <p>+90 558 955 4885</p>
+                                </div>
+                            </div><!-- End Info Item -->
+
+                            <div class="info-item d-flex">
+                                <i class="bi bi-clock flex-shrink-0"></i>
+                                <div>
+                                    <h4>Çalışma Saatleri:</h4>
+                                    <p>Pazartesi-Cumartesi: 11:00 - 23:00</p>
+                                </div>
+                            </div><!-- End Info Item -->
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-8">
+                        <form action="" method="post" role="form" class="php-email-form" id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Ad Soyad" required>
+                                </div>
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Mail" required>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Konu" required>
+                            </div>
+                            <div class="form-group mt-3">
+                                <textarea class="form-control" name="message" rows="7" placeholder="Mesaj" required></textarea>
+                            </div>
+                            <div class="my-3">
+                                <div class="loading">Yükleniyor</div>
+
+                                <div class="sent-message">Mesajınız gönderildi. Teşekkür ederiz!</div>
+                            </div>
+                            <div class="text-center"><button type="submit">Mesajı Gönder</button></div>
+                        </form>
+                    </div><!-- End Contact Form -->
+
+                </div>
+
+            </div>
+        </section><!-- End Contact Section -->
+
+    </main><!-- End #main -->
+
+    <script>// Handle form submission
+        document.getElementById("contactForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Show the loading message
+            var loadingMessage = document.querySelector("#contactForm .loading");
+            loadingMessage.style.display = "block";
+
+            // Simulate a delay to show the feedback message
+            setTimeout(function () {
+                // Hide the loading message
+                loadingMessage.style.display = "none";
+
+                // Show the success message
+                var successMessage = document.querySelector("#contactForm .sent-message");
+                successMessage.style.display = "block";
+            }, 2000);
+        });</script>
+}
+
+else
+{
+    Layout = null;
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>Performing Maintenance</title>
+        <style type="text/css">
+            body {
+                text-align: center;
+                padding: 150px;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            body {
+                font: 20px Helvetica, sans-serif;
+                color: #333;
+            }
+
+            #article {
+                display: block;
+                text-align: left;
+                width: 650px;
+                margin: 0 auto;
+            }
+
+            a {
+                color: #dc8100;
+                text-decoration: none;
+            }
+
+                a:hover {
+                    color: #333;
+                    text-decoration: none;
+                }
+        </style>
+    </head>
+    <body>
+        <div id="article">
+            <h1>Thrilled to announce that we'll be launching soon!</h1>
+            <div>
+                <p>As we put the finishing touches on our platform, we want to ensure that everything is running smoothly and perfectly for your optimal experience.</p>
+                <p>— RTE KAZANDI</p>
+            </div>
         </div>
-    </section><!-- End Contact Section -->
+    </body>
+</html>
+}
 
-</main><!-- End #main -->
-
-<script>
-    // Handle form submission
-    document.getElementById("contactForm").addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent default form submission
-
-        // Show the loading message
-        var loadingMessage = document.querySelector("#contactForm .loading");
-        loadingMessage.style.display = "block";
-
-        // Simulate a delay to show the feedback message
-        setTimeout(function () {
-            // Hide the loading message
-            loadingMessage.style.display = "none";
-
-            // Show the success message
-            var successMessage = document.querySelector("#contactForm .sent-message");
-            successMessage.style.display = "block";
-        }, 2000);
-    });</script>
