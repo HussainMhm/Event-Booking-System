@@ -127,10 +127,6 @@ namespace MetaX.Migrations
 
                     b.HasKey("ReviewID");
 
-                    b.HasIndex("EventID");
-
-                    b.HasIndex("UserID");
-
                     b.ToTable("ReviewsTable");
                 });
 
@@ -168,25 +164,6 @@ namespace MetaX.Migrations
                 });
 
             modelBuilder.Entity("MetaX.Model.Reservation", b =>
-                {
-                    b.HasOne("MetaX.Model.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MetaX.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Event");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("MetaX.Model.Review", b =>
                 {
                     b.HasOne("MetaX.Model.Event", "Event")
                         .WithMany()
