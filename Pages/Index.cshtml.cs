@@ -43,7 +43,7 @@ namespace MetaX.Pages
         {
             var latestReviews = await _db.ReviewsTable
                 .OrderByDescending(r => r.ReviewID)
-                .Take(3)
+                .Take(5)
                 .ToListAsync();
 
             var reviewDetails = new List<ReviewDetails>();
