@@ -65,7 +65,7 @@
                 <div class="col-lg-6">
                     <div class="content ps-0 ps-lg-5 pe-2">
                         <p>
-                            MetaX Events, etkinlik dünyasında öncü bir rezervasyon platformudur. Amacımız, insanların heyecan verici etkinliklerle bir araya gelmesini sağlayarak unutulmaz deneyimler yaratmaktır. Geniş bir etkinlik portföyü sunarak müzik konserlerinden sanat sergilerine, spor etkinliklerinden konferanslara kadar herkesin ilgisini çekebilecek çeşitli etkinlikleri bir araya getiriyoruz.  
+                            MetaX Events, etkinlik dünyasında öncü bir rezervasyon platformudur. Amacımız, insanların heyecan verici etkinliklerle bir araya gelmesini sağlayarak unutulmaz deneyimler yaratmaktır. Geniş bir etkinlik portföyü sunarak müzik konserlerinden sanat sergilerine, spor etkinliklerinden konferanslara kadar herkesin ilgisini çekebilecek çeşitli etkinlikleri bir araya getiriyoruz.
                         </p>
                         <p>
                             Müşteri memnuniyetini en üst düzeyde tutmak için kullanıcı dostu bir arayüz ve güvenli bir rezervasyon deneyimi sunuyoruz. Ekip olarak, etkinliklere olan tutkumuzu paylaşıyor ve her bir etkinlik deneyiminin benzersiz olduğuna inanıyoruz. MetaX Events'e katılın, sınırsız etkinlik seçenekleriyle dolu olan büyülü bir dünyaya adım atın.
@@ -76,7 +76,6 @@
 
         </div>
     </section><!-- End About Us Section -->
-
     <!-- ======= Our Services Section ======= -->
     <section id="services" class="services sections-bg">
         <div class="container" data-aos="fade-up">
@@ -122,7 +121,6 @@
 
         </div>
     </section><!-- End Our Services Section -->
-
     <!-- ======= Recent Blog Posts Section ======= -->
     <section id="recent-posts" class="recent-posts">
         <div class="container" data-aos="fade-up">
@@ -136,39 +134,38 @@
 
                 @foreach (var _event in Model.EarlyEvents)
                 {
-                <div class="col-xl-4 col-md-6">
-                    <article>
+                    <div class="col-xl-4 col-md-6">
+                        <article>
 
-                        <div class="post-img">
-                            <img src="@_event.Image" alt="" class="img-fluid">
-                        </div>
+                            <div class="post-img">
+                                <img src="@_event.Image" alt="" class="img-fluid">
+                            </div>
 
                             <p class="post-category">@_event.Category</p>
 
-                        <h2 class="title">
+                            <h2 class="title">
                                 <a asp-page="EventDetails" asp-route-id="@_event.EventID">@_event.Title</a>
-                        </h2>
+                            </h2>
 
-                        <div class="d-flex align-items-center">
-                            <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                            <div class="post-meta">
+                            <div class="d-flex align-items-center">
+                                <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+                                <div class="post-meta">
                                     <p class="post-author">@_event.Location</p>
-                                <p class="post-date">
+                                    <p class="post-date">
                                         <time>@_event.Date.ToString("dd-MM-yyyy")</time>
-                                </p>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
 
-                    </article>
-                </div><!-- End post list item -->
+                        </article>
+                    </div><!-- End post list item -->
                 }
-          
+
 
             </div><!-- End recent posts list -->
 
         </div>
     </section><!-- End Recent Blog Posts Section -->
-
     <!-- ======= Our Team Section ======= -->
     <section id="team" class="team sections-bg">
         <div class="container" data-aos="fade-up">
@@ -206,7 +203,6 @@
 
         </div>
     </section><!-- End Our Team Section -->
-    
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq">
         <div class="container" data-aos="fade-up">
@@ -275,11 +271,9 @@
 
         </div>
     </section><!-- End Frequently Asked Questions Section -->
-
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials sections-bg">
         <div class="container" data-aos="fade-up">
-
             <div class="section-header">
                 <h2>Müşteri Yorumları</h2>
                 <p>MetaX Events'in geniş etkinlik seçenekleri, kolay rezervasyon süreci ve güvenli ödeme yöntemleri hakkındaki memnuniyetlerini sizlerle paylaşıyoruz. Platformumuz hakkında daha fazla bilgi edinin!</p>
@@ -287,8 +281,7 @@
 
             <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
                 <div class="swiper-wrapper">
-
-                    @foreach (var _review in Model.PopulerReviews)
+                    @foreach (var review in Model.Reviews)
                     {
                         <div class="swiper-slide">
                             <div class="testimonial-wrap">
@@ -296,14 +289,14 @@
                                     <div class="d-flex align-items-center">
                                         <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img flex-shrink-0" alt="">
                                         <div>
-                                            <h3>@($"{_review.User.Name} {_review.User.Surname}")</h3>
-                                            <h4>@_review.Event.Title</h4>
+                                            <h3>@review.UserName</h3>
+                                            <h4>@review.EventName</h4>
                                             <div class="stars">
-                                                @for (int i = 0; i < _review.Rating; i++)
+                                                @for (int i = 0; i < review.Rating; i++)
                                                 {
                                                     <i class="bi bi-star-fill"></i>
                                                 }
-                                                @for (int i = 5; i > _review.Rating; i--)
+                                                @for (int i = review.Rating; i < 5; i++)
                                                 {
                                                     <i class="bi bi-star"></i>
                                                 }
@@ -312,25 +305,19 @@
                                     </div>
                                     <p>
                                         <i class="bi bi-quote quote-icon-left"></i>
-                                        @_review.Comment
+                                        @review.Comment
                                         <i class="bi bi-quote quote-icon-right"></i>
                                     </p>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- End testimonial item -->
                     }
-
-                    
-
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-
         </div>
-    </section><!-- End Testimonials Section -->
-
+    </section>
+    <!-- End Testimonials Section -->
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">

@@ -1,7 +1,7 @@
 ﻿using MetaX.Data;
+using MetaX.Model;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,12 +12,10 @@ namespace MetaX.Pages
     {
         private readonly MetaxDbContext _db;
 
-        public List<Model.Review> PopulerReviews { get; set; }
         public List<Model.Event> EarlyEvents { get; set; }
         public List<string> PopulerKategoriIds { get; set; }
-        
+        public List<ReviewDetails> Reviews { get; set; }
 
-        
         public IndexModel(MetaxDbContext db)
         {
             _db = db;
@@ -25,13 +23,6 @@ namespace MetaX.Pages
 
         public async Task OnGetAsync()
         {
-            PopulerReviews = await _db.ReviewsTable
-                .Include(r => r.User)  // Include the related User data
-                .Include(r => r.Event)  // Include the related Event data
-                .OrderByDescending(r => r.Rating)
-                .Take(5)
-                .ToListAsync();
-
             EarlyEvents = await _db.EventsTable
                 .Where(e => e.Date.Date >= DateTime.Now.Date)
                 .OrderBy(e => e.Date)
@@ -45,9 +36,43 @@ namespace MetaX.Pages
                 .Take(4)
                 .ToListAsync();
 
-
-            
+            Reviews = await GetLatestReviewDetails();
         }
-       
+
+        public async Task<List<ReviewDetails>> GetLatestReviewDetails()
+        {
+            var latestReviews = await _db.ReviewsTable
+                .OrderByDescending(r => r.ReviewID)
+                .Take(3)
+                .ToListAsync();
+
+            var reviewDetails = new List<ReviewDetails>();
+
+            foreach (var review in latestReviews)
+            {
+                var user = await _db.UsersTable.FindAsync(review.UserID);
+                var eventName = (await _db.EventsTable.FindAsync(review.EventID)).Title;
+
+                var reviewDetail = new ReviewDetails
+                {
+                    UserName = $"{user.Name} {user.Surname}",
+                    EventName = eventName,
+                    Rating = review.Rating,
+                    Comment = review.Comment
+                };
+
+                reviewDetails.Add(reviewDetail);
+            }
+
+            return reviewDetails;
+        }
+    }
+
+    public class ReviewDetails
+    {
+        public string UserName { get; set; }
+        public string EventName { get; set; }
+        public int Rating { get; set; }
+        public string Comment { get; set; }
     }
 }
