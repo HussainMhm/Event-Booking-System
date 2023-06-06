@@ -16,40 +16,64 @@
     <div class="row mt-4 me-4">
         <div class="col-xl-6">
             <div class="card bg-c-blue order-card">
-                <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                <div class="card-block d-flex justify-content-between">
+                    <div class="d-block">
+                        <h3>Etkinlikler</h3>
+                        <svg class="bi" width="50" height="50">
+                            <use xlink:href="#events"></use>
+                        </svg>
+                    </div>
+                        <h2>
+                            <span class="ms-5 mb-5 " style="font-size:100px;">@Model.EventCount</span>
+                        </h2>
                 </div>
             </div>
         </div>
 
         <div class="col-xl-6">
             <div class="card bg-c-green order-card">
-                <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                <div class="card-block d-flex justify-content-between">
+                    <div class="d-block">
+                        <h3>Kullanıcılar</h3>
+                        <svg class="bi me-2" width="50" height="50">
+                            <use xlink:href="#users"></use>
+                        </svg>
+                    </div> 
+                    <h2>
+                        <span class="ms-5 mb-5 " style="font-size:100px;">@Model.UserCount</span>
+                    </h2>
                 </div>
             </div>
         </div>
 
         <div class=" col-xl-6">
             <div class="card bg-c-yellow order-card">
-                <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                <div class="card-block d-flex justify-content-between">
+                    <div class="d-block">
+                        <h3>Değerlendirmeler</h3>
+                        <svg class="bi me-2" width="50" height="50">
+                            <use xlink:href="#reviews"></use>
+                        </svg>
+                    </div>
+                    <h2>
+                        <span class="ms-5 mb-5 " style="font-size:100px;">@Model.AverageRating</span>
+                    </h2>
                 </div>
             </div>
         </div>
 
         <div class="col-xl-6">
             <div class="card bg-c-pink order-card">
-                <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                <div class="card-block d-flex justify-content-between">
+                    <div class="d-block">
+                        <h3>Rezervasyonlar</h3>
+                        <svg class="bi me-2" width="50" height="50">
+                            <use xlink:href="#reservations"></use>
+                        </svg>
+                    </div>
+                    <h2>
+                        <span class="ms-5 mb-5 " style="font-size:100px;">@Model.ReservationCount</span>
+                    </h2>
                 </div>
             </div>
         </div>

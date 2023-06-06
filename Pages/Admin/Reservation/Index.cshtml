@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-2 text-right d-flex align-items-center">
                     <select id="filterStatus" class="form-control" name="Status">
-                        <option value="">Tum Durumlar</option>
+                        <option value="">Tüm Durumlar</option>
                         <option value="Aktif" selected="@Model.IsStatusActive">Aktif</option>
                         <option value="Bitti" selected="@Model.IsStatusFinished">Bitti</option>
                     </select>
@@ -52,7 +52,7 @@
                         <th scope="col">Kullanıcı Adı</th>
                         <th scope="col">Etkinlik Adı</th>
                         <th scope="col">Etkinlik Tarihi</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Durum</th>
                         <th scope="col">İşlem</th>
                     </tr>
                 </thead>
@@ -100,7 +100,7 @@
         });
     }
     function clearInput() {
-        document.getElementById('filterStatus').value = 'Tum Durumlar';
+        document.getElementById('filterStatus').value = 'Tüm Durumlar';
         document.getElementById('searchInput').value = '';
         document.getElementById('eventInput').value = '';
         document.getElementById('hiddenSubmit').click();

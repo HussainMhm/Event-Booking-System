@@ -55,6 +55,7 @@ namespace MetaX.Pages
 
                 var reviewDetail = new ReviewDetails
                 {
+                    UserID = review.UserID,
                     UserName = $"{user.Name} {user.Surname}",
                     EventName = eventName,
                     Rating = review.Rating,
@@ -70,6 +71,7 @@ namespace MetaX.Pages
 
     public class ReviewDetails
     {
+        public int UserID { get; set; }
         public string UserName { get; set; }
         public string EventName { get; set; }
         public int Rating { get; set; }
