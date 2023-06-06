@@ -52,11 +52,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var review in Model.ReviewListing)
+                    @foreach (var review in Model.Reviews)
                     {
                         <tr>
-                            <td>@review.Event.Title</td>
-                            <td>@($"{review.User.Name} {review.User.Surname}")</td>
+                            <td>@review.EventName</td>
+                            <td>@review.UserName</td>
                             <td>@review.Rating</td>
                             <td>@review.Comment</td>
                             <td>
