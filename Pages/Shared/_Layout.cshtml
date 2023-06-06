@@ -42,7 +42,7 @@
                     <li><a href="/Events">Etkinlikler</a></li>
                     @if (Login.IsUserLoggedIn())
                     {
-                        <li><a href="/user/account">Hesabım</a></li>
+                        <li><a href="/User/">Hesabım</a></li>
                         <li>
                         <form id="logoutForm" method="post" asp-page="/User/Logout" asp-page-handler="Logout">
                             <button type="submit" class="nav-link btn btn-link">Çıkış Yap</button>

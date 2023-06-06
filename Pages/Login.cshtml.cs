@@ -56,7 +56,7 @@ namespace MetaX.Pages
             _httpContextAccessor.HttpContext.Session.SetString("UserPhoneNumber", user.PhoneNumber);
 
 
-            return RedirectToPage("/User/Account");
+            return RedirectToPage("/Index");
         }
 
     }
