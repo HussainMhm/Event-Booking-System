@@ -1,0 +1,82 @@
+﻿@page
+@model MetaX.Pages.ReviewModel
+@{
+}
+
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+    <div class="page-header d-flex align-items-center"
+         style="background-image: url('')">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2>Değerlendirmelerim</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="container">
+            <ol>
+                <li><a href="/User">Home</a></li>
+                <li>Değerlendirmeler</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+<!-- End Breadcrumbs -->
+
+<div class="container my-5">
+    <h3>Yorum Yap</h3>
+    @if (TempData["ReviewSuccess"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["ReviewSuccess"]
+        </div>
+    }
+    @if (Model.Reservations.Count == 0)
+    {
+        <div class="alert alert-danger my-4" role="alert">
+            Herhangi bir reservasyonunuz olmadığından maalesef bir yorum yapamayacaksınız.
+        </div>
+    }
+    else
+    {
+        <form method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="event">Etkinlik</label>
+                <select class="form-control" id="event" name="EventID">
+                    <option value="">Select event</option>
+                    @foreach (var reservation in Model.Reservations)
+                    {
+                        <option value="@reservation.Event.EventID">@reservation.Event.Title</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rating">Yıldızlar</label>
+                <select class="form-control" id="rating" name="Rating">
+                    <option value="1">☆</option>
+                    <option value="2">☆☆</option>
+                    <option value="3">☆☆☆</option>
+                    <option value="4">☆☆☆☆</option>
+                    <option value="5">☆☆☆☆☆</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="comment">Yorum</label>
+                <textarea class="form-control" id="comment" name="Comment" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success mt-2">Gönder</button>
+        </form>
+    }
+</div>
+
+<script>function validateForm() {
+        var eventDropdown = document.getElementById("event");
+        if (eventDropdown.value === "") {
+            alert("Lütfen bir etkinlik seçiniz");
+            return false;
+        }
+        return true;
+    }</script>

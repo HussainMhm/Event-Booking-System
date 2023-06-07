@@ -1,0 +1,155 @@
+﻿@page
+@model MetaX.Pages.EventsModel
+@{
+}
+
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div
+            class="page-header d-flex align-items-center"
+            style="background-image: url('')"
+        >
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2>Etkinlikler</h2>
+                        <p>
+                            İlgi alanınıza uygun etkinlikleri keşfedebilirsiniz. <br>Konserlerden tiyatro oyunlarına, spor etkinliklerinden sanat sergilerine kadar birçok farklı kategoriye ait etkinlikleri bulabileceksiniz. Unutulmaz deneyimler için sizi bekleyen etkinlik dünyasını keşfedin!
+                        </p>
+                        <div class="dropdown">
+                            <button class="btn btn-danger dropdown-toggle" type="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Kategori Seçiniz
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+                                <a class="dropdown-item" href="?">Tüm Kategoriler</a>
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <a class="dropdown-item" href="?category=@category.Name">@category.Name</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a href="/">Home</a></li>
+                    <li>Etkinlikler</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <div class="container">
+        
+
+    <!-- ======= Blog Section ======= -->
+        <section id="blog" class="blog">
+            @if (Model.Events.Count == 0)
+            {
+                <div class="alert alert-danger my-4" role="alert">
+                    Bu kategoride şuan aktif bir etkinlik bulunmamaktadır.
+                </div>
+            }
+            <div class="row gy-4 posts-list">
+
+                @foreach (var item in Model.Events)
+                {
+                    <div class="col-xl-4 col-md-6">
+                        <article>
+                            <div class="post-img">
+                                <img src="@item.Image"
+                                     alt="@item.Title"
+                                     class="img-fluid" />
+                            </div>
+
+                            <p class="post-category">@item.Category</p>
+
+                            <h2 class="title">
+                                <a asp-page="EventDetails" asp-route-id="@item.EventID">@item.Title</a>
+                            </h2>
+
+                            <div class="d-flex align-items-center border-bottom pb-4">
+                                <img src="assets/img/blog/blog-author.jpg"
+                                     alt="@item.Title"
+                                     class="img-fluid post-author-img flex-shrink-0" />
+                                <div class="post-meta">
+                                    <p class="post-author-list">@item.Location</p>
+                                    <p class="post-date">
+                                        <time datetime="@item.Date.ToString("yyyy-MM-dd")">@item.Date.ToString("dd-MM-yyyy")</time>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Add footer here -->
+                            <div class="card-footer mt-3">
+                                <h6 class="ticket-price">Bilet Fiyatı: ₺@item.Price.ToString("F2")</h6>
+                            </div>
+
+                        </article>
+                    </div>
+                }
+                <!-- End post list item -->
+
+            </div>
+            <!-- End blog posts list -->
+
+
+            <div class="blog-pagination">
+                <ul class="justify-content-center">
+                    @for (var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        var currentPage = string.IsNullOrEmpty(HttpContext.Request.Query["pageNumber"])
+                                            ? 1 : Convert.ToInt32(HttpContext.Request.Query["pageNumber"]);
+                        if (i == currentPage)
+                        {
+                            <li class="active"><a href="#">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="?pageNumber=@i">@i</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+            <!-- End blog pagination -->
+
+
+</div>
+    </section>
+    <!-- End Blog Section -->
+</main>
+<!-- End #main -->
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"
+    ><i class="bi bi-arrow-up-short"></i
+></a>
+
+<!-- <div id="preloader"></div> -->
+
+<!-- Vendor JS Files -->
+<script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/assets/vendor/aos/aos.js"></script>
+<script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="~/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="~/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="~/assets/js/main.js"></script>
+<!-- Add these references at the end of your body section -->
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+

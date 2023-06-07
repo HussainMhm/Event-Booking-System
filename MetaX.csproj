@@ -26,13 +26,10 @@
     <None Remove="Pages\Users\" />
     <None Remove="Pages\Admin\" />
     <None Remove="Pages\Admin\Event\" />
-    <None Remove="Pages\Review\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Model\" />
     <Folder Include="Pages\Event\" />
-    <Folder Include="Pages\User\" />
-    <Folder Include="Pages\Review\" />
   </ItemGroup>
 </Project>

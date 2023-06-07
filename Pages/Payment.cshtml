@@ -1,0 +1,72 @@
+﻿@page
+@model MetaX.Pages.PaymentModel
+@{
+}
+
+<style>
+    .center-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .custom-margin {
+        margin-top: 10rem;
+        margin-bottom: 10rem;
+    }
+
+    .form-group {
+        margin-top: 10px;
+    }
+</style>
+
+<div class="container custom-margin">
+    <div class="center-form mt-5">
+        <h2 class="mb-4 text-center">Payment Details</h2>
+        <form method="post">
+            <div class="form-group">
+                <label for="cardHolder">Kart Üzerindeki İsim</label>
+                <input type="text" class="form-control" id="cardHolder" required>
+            </div>
+            <div class="form-group">
+                <label for="cardNumber">Kart Numarası</label>
+                <input type="text" class="form-control" id="cardNumber" required pattern="\d*" minlength="16" maxlength="16">
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label for="expiryMonth">Ay</label>
+                    <select class="form-control" id="expiryMonth">
+                        @for (int month = 1; month <= 12; month++)
+                        {
+                            <option value="@month">@month</option>
+                        }
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="expiryYear">Yıl</label>
+                    <select class="form-control" id="expiryYear">
+                        @for (int year = 2023; year <= 2033; year++)
+                        {
+                            <option value="@year">@year</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" class="form-control" id="cvv" required pattern="\d*" minlength="3" maxlength="3">
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label for="amount">Ödeme Miktarı</label>
+                    <input type="text" class="form-control" id="amount" value="₺ @Model.Price.ToString("F2")" readonly>
+                </div>
+                <div class="col">
+                    <label for="detail">Açıklama</label>
+                    <input type="text" class="form-control" id="detail" value="@Model.EventName" readonly>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-4">Ödeme Yap</button>
+        </form>
+    </div>
+</div>

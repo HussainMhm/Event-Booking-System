@@ -13,9 +13,6 @@
 
     <form id="searchForm" method="get">
         <div class="row mt-5">
-            <div class="col-auto">
-                <input type="text" id="eventInput" class="form-control" placeholder="Etkinlik Adı" name="eventName" value="@Request.Query["Title"]">
-            </div>
             <div class="col-auto col-md-2">
                 <select id="ratingInput" class="form-control" name="rating">
                     <option value="">Puan Seçiniz</option>
@@ -52,16 +49,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var review in Model.ReviewListing)
+                    @foreach (var review in Model.Reviews)
                     {
                         <tr>
-                            <td>@review.Event.Title</td>
-                            <td>@($"{review.User.Name} {review.User.Surname}")</td>
+                            <td>@review.EventName</td>
+                            <td>@review.UserName</td>
                             <td>@review.Rating</td>
                             <td>@review.Comment</td>
                             <td>
                                 <form method="post" asp-page-handler="Delete" asp-route-reviewId="@review.ReviewID" onsubmit="return confirmDelete(event);">
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-sm btn-danger">Kaldır</button>
                                 </form>
                             </td>
                         </tr>
@@ -74,17 +71,19 @@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>function confirmDelete(event) {
+    <script>
+        function confirmDelete(event) {
             event.preventDefault();
 
             Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this review!',
+                title: 'Silmek istediğinizden emin misiniz?',
+                text: 'Bu işlemi daha sonra tekrar geri alamayacaksınız.',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Evet, eminim!',
+                cancelButtonText: 'Hayır, vazgeçtim!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.target.submit();
@@ -93,7 +92,6 @@
         }
 
         function clearInput() {
-            document.getElementById('eventInput').value = '';
             document.getElementById('ratingInput').value = '';
             document.getElementById('searchForm').submit();
         }</script>
