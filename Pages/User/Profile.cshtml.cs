@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MetaX.Pages.User
 {
-    [Authorize]
+    //[Authorize]
     public class ProfileModel : PageModel
     {
         private readonly MetaxDbContext _context;
@@ -21,7 +21,7 @@ namespace MetaX.Pages.User
         [BindProperty]
         public Model.User User { get; set; }
 
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> OnGetAsync(int id)
         {
             User = await _context.UsersTable.FindAsync(id);
