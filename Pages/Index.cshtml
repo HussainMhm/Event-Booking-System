@@ -316,34 +316,14 @@
                         </div>
                     }
                 </div>
-<<<<<<< HEAD
 
+            </div>
             </div>
         </section><!-- End Contact Section -->
 
-    </main><!-- End #main -->
 
-    <script>// Handle form submission
-        document.getElementById("contactForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent default form submission
 
-            // Show the loading message
-            var loadingMessage = document.querySelector("#contactForm .loading");
-            loadingMessage.style.display = "block";
 
-            // Simulate a delay to show the feedback message
-            setTimeout(function () {
-                // Hide the loading message
-                loadingMessage.style.display = "none";
-
-                // Show the success message
-                var successMessage = document.querySelector("#contactForm .sent-message");
-                successMessage.style.display = "block";
-            }, 2000);
-        });</script>
-}
-    </section>
-    <!-- End Testimonials Section -->
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
@@ -423,24 +403,28 @@
         </div>
     </section><!-- End Contact Section -->
 
+
+    <script>
+        // Handle form submission
+        document.getElementById("contactForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Show the loading message
+            var loadingMessage = document.querySelector("#contactForm .loading");
+            loadingMessage.style.display = "block";
+
+            // Simulate a delay to show the feedback message
+            setTimeout(function () {
+                // Hide the loading message
+                loadingMessage.style.display = "none";
+
+                // Show the success message
+                var successMessage = document.querySelector("#contactForm .sent-message");
+                successMessage.style.display = "block";
+            }, 2000);
+        });</script>
+
+
 </main><!-- End #main -->
 
-<script>
-    // Handle form submission
-    document.getElementById("contactForm").addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent default form submission
 
-        // Show the loading message
-        var loadingMessage = document.querySelector("#contactForm .loading");
-        loadingMessage.style.display = "block";
-
-        // Simulate a delay to show the feedback message
-        setTimeout(function () {
-            // Hide the loading message
-            loadingMessage.style.display = "none";
-
-            // Show the success message
-            var successMessage = document.querySelector("#contactForm .sent-message");
-            successMessage.style.display = "block";
-        }, 2000);
-    });</script>
