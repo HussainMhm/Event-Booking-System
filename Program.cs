@@ -1,20 +1,37 @@
 ﻿using MetaX.Data;
 using MetaX.Pages;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddRazorPages()
+    .AddRazorPagesOptions(options =>
+    {
+        // Add a convention that applies authorization to all pages under the "/Admin" folder
+        options.Conventions.AuthorizeFolder("/Admin", "Admin");
+    })
+    .AddRazorRuntimeCompilation();
 
 // Add Cookie Authentication services
 builder.Services.AddAuthentication("CookieAuth")
     .AddCookie("CookieAuth", config =>
     {
         config.Cookie.Name = "Admin.Cookie";
-        config.LoginPath = "/Admin/Login";
+        config.LoginPath = "/Admin-login";
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy =>
+    {
+        policy.AuthenticationSchemes.Add("CookieAuth");
+        policy.RequireAuthenticatedUser();
+    });
+});
 
 // Add Sql server connection
 builder.Services.AddDbContext<MetaxDbContext>(options =>
@@ -42,7 +59,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // <-- Add this
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
